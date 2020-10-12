@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:08:08 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/06 12:56:56 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/10/12 15:30:44 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ typedef struct	s_list2
 	int			reso[2];
 	int			f[3];
 	int			c[3];
+	int 		t_map_x;
+	int			t_map_y;
 }				t_list_map;
 
 
@@ -78,7 +80,7 @@ int		ft_test_if_NSEW(char **map, int t_map);
 int     ft_space_found(char **map, int i, int t, int t_map);
 int		ft_circled_of_1_horizontal(char **map, int t_map);
 int		ft_circled_of_1_vertical(char **map, int t_map);
-char	**ft_resize_map(char **map, int t_map);
+char	**ft_resize_map(t_list_map *map, int t_map);
 int		ft_map_is_split(char **map, int t_map);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:07:32 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/05 12:18:55 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/10/12 15:37:47 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,7 @@ int		ft_init_map(t_list_map *map, char *cub)
 	int		fd;
 	char	*line;
 	int		taille_lu;
-	int		t_map;
 
-	t_map = 0;
 	ft_init_map2(map);
 	fd = open(cub, O_RDONLY);
 	if (fd == -1)
@@ -128,27 +126,25 @@ int		ft_init_map(t_list_map *map, char *cub)
 	while ((taille_lu = get_next_line(fd, &line)) > 0)
 	{
 		if (map->last_verif < 8)
-			ft_detect_map(map, line);
-		else if (map->last_verif == 8 && (line[0] != '\0' || t_map > 0))
-			map->map = ft_line_to_array_of_str(map->map, line, t_map++);
+			ft_detect_map(map, line); //verif et recuperation des donnees de la map
+		else if (map->last_verif == 8 && (line[0] != '\0' || map->t_map_y > 0))
+			map->map = ft_line_to_array_of_str(map->map, line, map->t_map_y++);
 		free(line);
 	}
 	if (map->last_verif == 8)
-		map->map = ft_line_to_array_of_str(map->map, line, t_map++);
+		map->map = ft_line_to_array_of_str(map->map, line, map->t_map_y++);
 	free(line);
-		map->map = ft_resize_map(map->map, t_map);
-	for (int i = 0; map->map[i] != 0; i++)
-	{
-		ft_putstr(map->map[i]);
-		ft_putchar('\n');
-	}
+	map->map = ft_resize_map(map, map->t_map_y);
 	if (map->last_verif != 8 || close(fd) == -1 || ft_test_info_map(map) == -1 ||
-		ft_test_map(map->map, t_map) < 0)
+		ft_test_map(map->map, map->t_map_y) < 0)
 		return(ft_return_error());
 	return (0);
 }
 
 	/*for (int i = 0; map->map[i] != 0; i++)
-		printf("%s\n", map->map[i]);
+	{
+		ft_putstr(map->map[i]);
+		ft_putchar('\n');
+	}
 	printf("no =%s\nso =%s\nwe =%s\nea =%s\nsprite =%s\n", map->no, map->so, map->we, map->ea, map->sprite);
 	printf("reso = %i %i\ncouleur sol = %i,%i,%i\ncouleur plafond = %i,%i,%i\n", map->reso[0], map->reso[1], map->f[0], map->f[1], map->f[2], map->c[0], map->c[1], map->c[2]);*/
