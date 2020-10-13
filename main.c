@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:07:53 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/13 15:29:19 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/10/13 18:16:38 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,22 @@ void 	display_map2(t_list_ptr *ptr, t_list_map *map)
 void	display_map(t_list_ptr *ptr, t_list_map *map)
 {
 	int i;
-	int	t;
+	int t;
+	
 	// CHAR 0 1 2 3
 	// CLR	B G R A
 	i = 0;
+	t = 0;
 	while (i < map->reso[0] * 4 * map->reso[1])
 	{
-		t = 0;
-		i += (map->reso[0] / map->t_map_x) * 4;
-		while (t < map->reso[0] * 4 && i < map->reso[0] * 4 * map->reso[1])
+		i += (map->reso[0] * 4 / map->t_map_x);
+		if (t < map->t_map_x - 1)
 		{
-			i += (map->reso[0] / map->t_map_x) * 4;
 			ptr->data_addr[i] = (char)255;
 			t++;
 		}
+		else
+			t = 0;
 	}
 	display_map2(ptr, map);
 }
