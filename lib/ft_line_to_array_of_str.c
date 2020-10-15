@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_line_to_array_of_str.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: berthetthomas <berthetthomas@student.42    +#+  +:+       +#+        */
+/*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:09:21 by thoberth          #+#    #+#             */
-/*   Updated: 2020/09/23 13:33:48 by berthetthom      ###   ########.fr       */
+/*   Updated: 2020/10/15 18:14:54 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

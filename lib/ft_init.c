@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:07:32 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/12 15:37:47 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/10/15 18:13:35 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	ft_init_ptr(t_list_ptr *ptr)
 	ptr->win_ptr = 0;
 	ptr->img_ptr = 0;
 	ptr->data_addr = "";
+	ptr->data_addr_minimap = "";
+	ptr->img_ptr_minimap = 0;
 }
 
 void	ft_init_map2(t_list_map	*map)

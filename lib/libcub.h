@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:08:08 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/12 15:30:44 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/10/15 15:03:11 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct	s_list
 	void		*win_ptr;
 	void		*img_ptr;
 	char		*data_addr;
+	void		*img_ptr_minimap;
+	char		*data_addr_minimap;
 }				t_list_ptr;
 
 /*
@@ -82,5 +84,6 @@ int		ft_circled_of_1_horizontal(char **map, int t_map);
 int		ft_circled_of_1_vertical(char **map, int t_map);
 char	**ft_resize_map(t_list_map *map, int t_map);
 int		ft_map_is_split(char **map, int t_map);
+void	ft_map2d(t_list_ptr *ptr, t_list_map *map);
 
 #endif
