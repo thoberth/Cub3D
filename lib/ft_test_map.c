@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 13:35:12 by berthetthom       #+#    #+#             */
-/*   Updated: 2020/10/05 16:37:56 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/10/16 15:05:20 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int     ft_charmap_isgood(char c)
     return (-1);
 }
 
-int		ft_test_if_NSEW(char **map, int t_map)
+int		ft_test_if_NSEW(t_list_map *map)
 {
 	int		i;
 	int		t;
@@ -34,14 +34,18 @@ int		ft_test_if_NSEW(char **map, int t_map)
 
 	i = 0;
 	c = 0;
-	while(i < t_map)
+	while(i < map->t_map_y)
 	{
 		t = 0;
-		while (map[i][t])
+		while (map->map[i][t])
 		{
-			if (map[i][t] == 'N' || map[i][t] == 'S' || map[i][t] == 'E' ||
-				map[i][t] == 'W')
-				c++;
+			if (map->map[i][t] == 'N' || map->map[i][t] == 'S' || map->map[i][t] == 'E' ||
+				map->map[i][t] == 'W')
+				{
+					map->PosplrX = t;
+					map->PosplrY = i;
+					c++;
+				}
 			t++;
 		}
 		i++;
@@ -72,7 +76,7 @@ int     ft_no_acc_space(char **map, int t_map)
 		ft_circled_of_1_vertical(map, t_map));
 }
 
-int     ft_test_map(char **map, int t_map)
+int     ft_test_map(t_list_map *map)
 {
     int     i;
     int     t;
@@ -80,10 +84,10 @@ int     ft_test_map(char **map, int t_map)
 
     i = 0;
 
-    while (i < t_map)
+    while (i < map->t_map_y)
     {
         t = 0;
-        tmp = map[i];
+        tmp = map->map[i];
         if (tmp[0] == '\0')
             return (-1);
         while(tmp[t])
@@ -94,5 +98,5 @@ int     ft_test_map(char **map, int t_map)
 		}
 		i++;
 	}
-	return (ft_no_acc_space(map, t_map) + ft_test_if_NSEW(map, t_map));
+	return (ft_no_acc_space(map, map->t_map_y) + ft_test_if_NSEW(map));
 }

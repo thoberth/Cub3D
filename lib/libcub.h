@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:08:08 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/15 15:03:11 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/10/16 15:04:28 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <math.h>
 # include "get_next_line.h"
 
-/*
+/*  
 ** Structure contenant les ptrs
 */
 typedef struct	s_list
@@ -35,7 +35,7 @@ typedef struct	s_list
 }				t_list_ptr;
 
 /*
-** Structure contenant les informations de la map;
+** Structure contenant les informations de la map
 */
 typedef struct	s_list2
 {
@@ -43,7 +43,6 @@ typedef struct	s_list2
 	int			verif_f; //0 si reso non defini un si def
 	int			verif_c; //0 si reso non defini un si def
 	int			last_verif; //incrementez a chaque info fournie donc si diff de 8 <- Error
-	char		*tmp; // utilisez pour stockez le reste du .cub une fois last_verif = 8
 	char		**map;
 	char		*no;
 	char		*so;
@@ -55,7 +54,20 @@ typedef struct	s_list2
 	int			c[3];
 	int 		t_map_x;
 	int			t_map_y;
+	int			PosplrX;
+	int			PosplrY;
+	int			Angle_plr;
 }				t_list_map;
+
+/*
+** Structure contenant les informations du joueur
+*/
+typedef struct	s_list3
+{
+	int			PosX;
+	int			PosY;
+	int			Angle_dir;
+}				t_list_plr;
 
 
 /*
@@ -74,11 +86,11 @@ void	ft_putnbr(int nb);
 int		ft_atoi(const char *str);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strdup(char *s1);
-int     ft_test_map(char **map, int t_map);
+int     ft_test_map(t_list_map *map);
 char	**ft_line_to_array_of_str(char	**map, char *line, int c);
 int     ft_charmap_isgood(char c);
 int     ft_no_acc_space(char **map, int t_map);
-int		ft_test_if_NSEW(char **map, int t_map);
+int		ft_test_if_NSEW(t_list_map *map);
 int     ft_space_found(char **map, int i, int t, int t_map);
 int		ft_circled_of_1_horizontal(char **map, int t_map);
 int		ft_circled_of_1_vertical(char **map, int t_map);

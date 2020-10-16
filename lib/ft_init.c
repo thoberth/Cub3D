@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:07:32 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/15 18:13:35 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/10/16 15:02:12 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	ft_init_map2(t_list_map	*map)
 	map->verif_f = 0;
 	map->verif_c = 0;
 	map->last_verif = 0;
+	map->t_map_y = 0;
+	map->t_map_x = 0;
 	map->no = NULL;
 	map->so = NULL;
 	map->ea = NULL;
@@ -138,7 +140,7 @@ int		ft_init_map(t_list_map *map, char *cub)
 	free(line);
 	map->map = ft_resize_map(map, map->t_map_y);
 	if (map->last_verif != 8 || close(fd) == -1 || ft_test_info_map(map) == -1 ||
-		ft_test_map(map->map, map->t_map_y) < 0)
+		ft_test_map(map) < 0)
 		return(ft_return_error());
 	return (0);
 }

@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_line_to_array_of_str.c                          :+:      :+:    :+:   */
+/*   ft_init_plr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/18 10:09:21 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/16 11:08:53 by thoberth         ###   ########.fr       */
+/*   Created: 2020/10/16 14:48:55 by thoberth          #+#    #+#             */
+/*   Updated: 2020/10/16 15:05:23 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libcub.h"
 
-char	**ft_line_to_array_of_str(char **map, char *line, int c)
+void	ft_init_plr(t_list_plr *plr, t_list_map *map)
 {
-	int		i;
-	char	**res;
-	int		j;
-
-	i = c;
-	j = 0;
-	if (!(res = malloc(sizeof(char *) * (i + 2))))
-		return (NULL);
-	res[i + 1] = NULL;
-	while(j < i)
-	{
-		res[j] = ft_strdup(map[j]);
-		j++;
-	}
-	res[i] = ft_strdup(line);
-	return (res);
+	
+	while
 }

@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:07:53 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/15 18:08:05 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/10/16 15:02:53 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 //fonction qui est appelé lorsque l'utlisateur utilise une touche au clavier.
 int		deal_key(int key, void *param)
 {
-	if (key == 53)
+	if (key == 53) // ici 53 est egale a 'ESC'
 		exit(1);
 	return (0);
 }
@@ -24,11 +24,12 @@ int main ()
 {
 	t_list_ptr	ptr;
 	t_list_map	map;
+	t_list_plr	plr;
 
 	ft_init_ptr(&ptr);
-	ft_putchar('t');
 	if (ft_init_map(&map, "fstmap.cub") == -1)
 		return(-1);
+	ft_init_plr(&plr, &map);
 	ptr.mlx_ptr = mlx_init();
 	ptr.win_ptr = mlx_new_window(ptr.mlx_ptr, map.reso[0], map.reso[1], "Cub3D");
 	int bpp;
