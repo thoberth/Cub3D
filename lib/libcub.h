@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:08:08 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/16 15:04:28 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/10/19 12:27:43 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,20 +60,8 @@ typedef struct	s_list2
 }				t_list_map;
 
 /*
-** Structure contenant les informations du joueur
-*/
-typedef struct	s_list3
-{
-	int			PosX;
-	int			PosY;
-	int			Angle_dir;
-}				t_list_plr;
-
-
-/*
 ** Fonctions pour CUB3D
 */
-
 void	ft_init_ptr(t_list_ptr *ptr);
 int		ft_detect_map(t_list_map *map,char *line);
 int 	ft_init_map(t_list_map *map, char *cub);
@@ -90,12 +78,13 @@ int     ft_test_map(t_list_map *map);
 char	**ft_line_to_array_of_str(char	**map, char *line, int c);
 int     ft_charmap_isgood(char c);
 int     ft_no_acc_space(char **map, int t_map);
-int		ft_test_if_NSEW(t_list_map *map);
+int		ft_test_if_nsew(t_list_map *map);
 int     ft_space_found(char **map, int i, int t, int t_map);
 int		ft_circled_of_1_horizontal(char **map, int t_map);
 int		ft_circled_of_1_vertical(char **map, int t_map);
 char	**ft_resize_map(t_list_map *map, int t_map);
 int		ft_map_is_split(char **map, int t_map);
 void	ft_map2d(t_list_ptr *ptr, t_list_map *map);
+void	ft_event(t_list_ptr *ptr, t_list_map *map);
 
 #endif
