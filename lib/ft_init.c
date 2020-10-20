@@ -6,21 +6,11 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:07:32 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/19 11:41:36 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/10/20 15:13:58 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libcub.h"
-
-void	ft_init_ptr(t_list_ptr *ptr)
-{
-	ptr->mlx_ptr = 0;
-	ptr->win_ptr = 0;
-	ptr->img_ptr = 0;
-	ptr->data_addr = "";
-	ptr->data_addr_minimap = "";
-	ptr->img_ptr_minimap = 0;
-}
 
 void	ft_init_map2(t_list_map	*map)
 {
@@ -35,6 +25,12 @@ void	ft_init_map2(t_list_map	*map)
 	map->ea = NULL;
 	map->we = NULL;
 	map->sprite = NULL;
+	map->mlx_ptr = 0;
+	map->win_ptr = 0;
+	map->img_ptr = 0;
+	map->data_addr = "";
+	map->data_addr_minimap = "";
+	map->img_ptr_minimap = 0;
 	map->map = malloc(sizeof(char **));
 }
 
