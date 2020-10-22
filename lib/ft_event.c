@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 12:01:27 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/20 17:38:33 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/10/22 15:21:24 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,28 @@ void	ft_mod_angle(int key, t_list_map *map)
 
 void	ft_mod_pos(int key, t_list_map *map)
 {
+	int		tmpx;
+	int 	tmpy;
+
+	tmpx = map->Vposx / map->Vcubx;
+	tmpy = map->Vposy / map->Vcuby;
 	if (key == 13)
-		map->PosplrY -= 2;
+		map->Vposy += map->Vcuby / 8;
 	if (key == 0)
-		map->PosplrX -= 2;
+		map->Vposx += map->Vcubx / 8;
 	if (key == 1)
-		map->PosplrY += 2;
+		map->Vposy -= map->Vcuby / 8;
 	if (key == 2)
-		map->PosplrX += 2;
+		map->Vposx -= map->Vcubx / 8;
+	if (tmpx < map->Vposx / map->Vcubx)
+		map->PosplrX--;
+	if (tmpx > map->Vposx / map->Vcubx)
+		map->PosplrX++;
+	if (tmpy < map->Vposy / map->Vcuby)
+		map->PosplrY--;
+	if (tmpy > map->Vposy / map->Vcuby)
+		map->PosplrY++;
+	ft_map2d(map);
 }
 
 int		close_window(t_list_map *map)
@@ -48,7 +62,7 @@ int		close_window(t_list_map *map)
 
 int		deal_key(int key, t_list_map *map)
 {
-	if (key == 53) // ici 53 est egale a 'ESC'
+	if (key == 53)
 		close_window(map);
 	if (key == 123 || key == 124)
 		ft_mod_angle(key, map);

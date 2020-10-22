@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:08:08 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/20 17:37:52 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/10/22 14:59:59 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include "get_next_line.h"
 
 /*
-** Structure contenant les informations de la map
+** Structure contenant les informations de la map & autres
 */
 typedef struct	s_list2
 {
@@ -43,6 +43,10 @@ typedef struct	s_list2
 	int			t_map_y;
 	int			PosplrX; // en case
 	int			PosplrY; //en case
+	int			Vposx;
+	int			Vposy;
+	int			Vcubx;
+	int			Vcuby;
 	int			Angle_plr;
 	void		*mlx_ptr;
 	void		*win_ptr;
@@ -78,5 +82,9 @@ char	**ft_resize_map(t_list_map *map, int t_map);
 int		ft_map_is_split(char **map, int t_map);
 void	ft_map2d(t_list_map *map);
 void	ft_event(t_list_map *map);
+void	ft_raycasting(t_list_map *map);
+void	ft_player(t_list_map *map);
+void	ft_write2d(t_list_map *map, int i, int t);
+void	ft_start_all(t_list_map *map);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 12:52:36 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/20 15:16:07 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/10/22 15:22:08 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	ft_write2d(t_list_map *map, int i, int t)
 		j += ((map->reso[0] / 4) * 4) - (cub_x);
 	}
 }
-
 void	ft_aff_map2d(t_list_map *map)
 {
 	int		i;
@@ -55,6 +54,7 @@ void	ft_aff_map2d(t_list_map *map)
 		}
 		i++;
 	}
+	ft_write2d(map, map->PosplrY, map->PosplrX);
 }
 
 void	ft_map2d(t_list_map *map)

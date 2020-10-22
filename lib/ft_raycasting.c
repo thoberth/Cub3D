@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_raycasting.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/18 10:07:53 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/22 14:59:25 by thoberth         ###   ########.fr       */
+/*   Created: 2020/10/22 11:43:46 by thoberth          #+#    #+#             */
+/*   Updated: 2020/10/22 15:53:04 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib/libcub.h"
+#include "libcub.h"
 
-int main ()
+void	ft_raycasting(t_list_map *map)
 {
-	t_list_map	map;
+	int		bpp;
+	int		size_line;
+	int		endian;
 
-	if (ft_init_map(&map, "fstmap.cub") == -1)
-		return (-1);
-	map.mlx_ptr = mlx_init();
-	map.win_ptr = mlx_new_window(map.mlx_ptr, map.reso[0], map.reso[1], "Cub3D");
-	ft_start_all(&map);
-	return (0);
+	bpp = 32;
+	size_line = map->reso[0] * 4;
+	endian = 0;
+	map->img_ptr = mlx_new_image(map->mlx_ptr, map->reso[0], map->reso[1]);
+	map->data_addr = mlx_get_data_addr(map->img_ptr, &bpp, &size_line, &endian);
+	
 }
