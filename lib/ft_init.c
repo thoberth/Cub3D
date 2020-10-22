@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:07:32 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/20 15:13:58 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/10/22 17:40:21 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,24 @@
 
 void	ft_init_map2(t_list_map	*map)
 {
-	map->verif_reso = 0;
-	map->verif_f = 0;
-	map->verif_c = 0;
-	map->last_verif = 0;
-	map->t_map_y = 0;
-	map->t_map_x = 0;
-	map->no = NULL;
-	map->so = NULL;
-	map->ea = NULL;
-	map->we = NULL;
-	map->sprite = NULL;
-	map->mlx_ptr = 0;
-	map->win_ptr = 0;
-	map->img_ptr = 0;
-	map->data_addr = "";
-	map->data_addr_minimap = "";
-	map->img_ptr_minimap = 0;
-	map->map = malloc(sizeof(char **));
+	map->verif.verif_reso = 0;
+	map->verif.verif_f = 0;
+	map->verif.verif_c = 0;
+	map->verif.last_verif = 0;
+	map->map.t_map_y = 0;
+	map->map.t_map_x = 0;
+	map->map.no = NULL;
+	map->map.so = NULL;
+	map->map.ea = NULL;
+	map->map.we = NULL;
+	map->map.sprite = NULL;
+	map->data.mlx_ptr = 0;
+	map->data.win_ptr = 0;
+	map->data.img_ptr = 0;
+	map->data.data_addr = "";
+	map->data.data_addr_minimap = "";
+	map->data.img_ptr_minimap = 0;
+	map->map.map = malloc(sizeof(char **));
 }
 
 int		ft_detect_map(t_list_map *map, char *line)
@@ -41,74 +41,74 @@ int		ft_detect_map(t_list_map *map, char *line)
 	i = 0;
 	if (line[i] == 'R')
 	{
-		map->last_verif++;
-		map->verif_reso++;
+		map->verif.last_verif++;
+		map->verif.verif_reso++;
 		i++;
-		map->reso[0] = ft_atoi(&line[++i]);
+		map->map.reso[0] = ft_atoi(&line[++i]);
 		while (line[i] >= '0' && line[i] <= '9')
 			i++;
-		map->reso[1] = ft_atoi(&line[i]);
+		map->map.reso[1] = ft_atoi(&line[i]);
 	}
 	else if (line[i] == 'S' && line[i + 1] == 'O')
 	{
-		map->last_verif++;
+		map->verif.last_verif++;
 		while (line[i] != ' ')
 			i++;
-		map->so = ft_strdup(&line[i++]);
+		map->map.so = ft_strdup(&line[i++]);
 	}
 	else if (line[i] == 'N' && line[i + 1] == 'O')
 	{
-		map->last_verif++;
+		map->verif.last_verif++;
 		while (line[i] != ' ')
 			i++;
-		map->no = ft_strdup(&line[i++]);
+		map->map.no = ft_strdup(&line[i++]);
 	}
 	else if (line[i] == 'W' && line[i + 1] == 'E')
 	{
-		map->last_verif++;
+		map->verif.last_verif++;
 		while (line[i] != ' ')
 			i++;
-		map->we = ft_strdup(&line[i++]);
+		map->map.we = ft_strdup(&line[i++]);
 	}
 	else if (line[i] == 'E' && line[i + 1] == 'A')
 	{
-		map->last_verif++;
+		map->verif.last_verif++;
 		while (line[i] != ' ')
 			i++;
-		map->ea = ft_strdup(&line[i++]);
+		map->map.ea = ft_strdup(&line[i++]);
 	}
 	else if (line[i] == 'S')
 	{
-		map->last_verif++;
+		map->verif.last_verif++;
 		while (line[i] != ' ')
 			i++;
-		map->sprite = ft_strdup(&line[i++]);
+		map->map.sprite = ft_strdup(&line[i++]);
 	}
 	else if (line[i] == 'F')
 	{
-		map->last_verif++;
-		map->verif_f++;
+		map->verif.last_verif++;
+		map->verif.verif_f++;
 		i++;
-		map->f[0] = ft_atoi(&line[++i]);
+		map->map.f[0] = ft_atoi(&line[++i]);
 		while (line[i] != ',')
 			i++;
-		map->f[1] = ft_atoi(&line[++i]);
+		map->map.f[1] = ft_atoi(&line[++i]);
 		while (line[i] != ',')
 			i++;
-		map->f[2] = ft_atoi(&line[++i]);
+		map->map.f[2] = ft_atoi(&line[++i]);
 	}
 	else if (line[i] == 'C')
 	{
-		map->last_verif++;
-		map->verif_c++;
+		map->verif.last_verif++;
+		map->verif.verif_c++;
 		i++;
-		map->c[0] = ft_atoi(&line[++i]);
+		map->map.c[0] = ft_atoi(&line[++i]);
 		while (line[i] != ',')
 			i++;
-		map->c[1] = ft_atoi(&line[++i]);
+		map->map.c[1] = ft_atoi(&line[++i]);
 		while (line[i] != ',')
 			i++;
-		map->c[2] = ft_atoi(&line[++i]);
+		map->map.c[2] = ft_atoi(&line[++i]);
 	}
 	return (0);
 }
@@ -125,17 +125,17 @@ int		ft_init_map(t_list_map *map, char *cub)
 		return (ft_return_error());
 	while ((taille_lu = get_next_line(fd, &line)) > 0)
 	{
-		if (map->last_verif < 8)
+		if (map->verif.last_verif < 8)
 			ft_detect_map(map, line); //verif et recuperation des donnees de la map
-		else if (map->last_verif == 8 && (line[0] != '\0' || map->t_map_y > 0))
-			map->map = ft_line_to_array_of_str(map->map, line, map->t_map_y++);
+		else if (map->verif.last_verif == 8 && (line[0] != '\0' || map->map.t_map_y > 0))
+			map->map.map = ft_line_to_array_of_str(map->map.map, line, map->map.t_map_y++);
 		free(line);
 	}
-	if (map->last_verif == 8)
-		map->map = ft_line_to_array_of_str(map->map, line, map->t_map_y++);
+	if (map->verif.last_verif == 8)
+		map->map.map = ft_line_to_array_of_str(map->map.map, line, map->map.t_map_y++);
 	free(line);
-	map->map = ft_resize_map(map, map->t_map_y);
-	if (map->last_verif != 8 || close(fd) == -1 || ft_test_info_map(map) == -1 ||
+	map->map.map = ft_resize_map(map, map->map.t_map_y);
+	if (map->verif.last_verif != 8 || close(fd) == -1 || ft_test_info_map(map) == -1 ||
 		ft_test_map(map) < 0)
 		return(ft_return_error());
 	return (0);

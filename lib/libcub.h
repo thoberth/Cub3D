@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:08:08 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/22 14:59:59 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/10/22 18:09:04 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,42 +22,74 @@
 # include "get_next_line.h"
 
 /*
-** Structure contenant les informations de la map & autres
+** Structure contenant les variables
 */
-typedef struct	s_list2
+typedef struct	s_all
 {
-	int			verif_reso; //0 si reso non defini un si def
-	int			verif_f; //0 si reso non defini un si def
-	int			verif_c; //0 si reso non defini un si def
-	int			last_verif; //incrementez a chaque info fournie donc si diff de 8 <- Error
-	char		**map;
-	char		*no;
-	char		*so;
-	char		*we;
-	char		*ea;
-	char		*sprite;
-	int			reso[2];
-	int			f[3];
-	int			c[3];
-	int 		t_map_x;
-	int			t_map_y;
-	int			PosplrX; // en case
-	int			PosplrY; //en case
-	int			Vposx;
-	int			Vposy;
-	int			Vcubx;
-	int			Vcuby;
-	int			Angle_plr;
-	void		*mlx_ptr;
-	void		*win_ptr;
-	void		*img_ptr;
-	char		*data_addr;
-	void		*img_ptr_minimap;
-	char		*data_addr_minimap;
+	/*
+	** Structure contenant les var de verif
+	*/
+	struct		s_verif
+	{
+		int		verif_reso; //0 si reso non defini un si def
+		int		verif_f; //0 si reso non defini un si def
+		int		verif_c; //0 si reso non defini un si def
+		int		last_verif; //incrementez a chaque info fournie donc si diff de 8 <- Error
+	}			verif;
+	/*
+	** Structure contenant les infos de la map
+	*/
+	struct		s_map
+	{
+		char	**map;
+		char	*no;
+		char	*so;
+		char	*we;
+		char	*ea;
+		char	*sprite;
+		int		reso[2];
+		int		f[3];
+		int		c[3];
+		int 	t_map_x;
+		int		t_map_y;
+		int		Vcubx;
+		int		Vcuby;
+	}			map;
+	/*
+	** Structure contenant les infos du joueur
+	*/
+	struct		s_plr
+	{
+		int		PosplrX; // en case
+		int		PosplrY; //en case
+		int		Vposx;
+		int		Vposy;
+		int		Angle_plr;
+	}			plr;
+	/*
+	** Structure contenant le data de la minilibx
+	*/
+	struct		s_data
+	{
+		void	*mlx_ptr;
+		void	*win_ptr;
+		void	*img_ptr;
+		char	*data_addr;
+		void	*img_ptr_minimap;
+		char	*data_addr_minimap;
+	}			data;
+	/*
+	** Structure contenant les variables du raycaster
+	*/
+	struct		s_ray
+	{
+		int		FOV;
+	}			ray;
+	
 }				t_list_map;
 
 /*
-** Fonctions pour CUB3D
+** Fonctions
 */
 int		ft_detect_map(t_list_map *map,char *line);
 int 	ft_init_map(t_list_map *map, char *cub);

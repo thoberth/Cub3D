@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 13:35:12 by berthetthom       #+#    #+#             */
-/*   Updated: 2020/10/19 12:56:59 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/10/22 17:49:30 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@ int		ft_charmap_isgood(char c)
 
 void	ft_info_player(t_list_map *map, int i, int t)
 {
-	map->PosplrX = t ;
-	map->PosplrY = i ;
-	if (map->map[i][t] == 'N')
-		map->Angle_plr = 90;
-	if (map->map[i][t] == 'S')
-		map->Angle_plr = 270;
-	if (map->map[i][t] == 'E')
-		map->Angle_plr = 0;
-	if (map->map[i][t] == 'W')
-		map->Angle_plr = 180;
+	map->plr.PosplrX = t ;
+	map->plr.PosplrY = i ;
+	if (map->map.map[i][t] == 'N')
+		map->plr.Angle_plr = 90;
+	if (map->map.map[i][t] == 'S')
+		map->plr.Angle_plr = 270;
+	if (map->map.map[i][t] == 'E')
+		map->plr.Angle_plr = 0;
+	if (map->map.map[i][t] == 'W')
+		map->plr.Angle_plr = 180;
 }
 
 int		ft_test_if_nsew(t_list_map *map)
@@ -50,13 +50,13 @@ int		ft_test_if_nsew(t_list_map *map)
 
 	i = 0;
 	c = 0;
-	while (i < map->t_map_y)
+	while (i < map->map.t_map_y)
 	{
 		t = 0;
-		while (map->map[i][t])
+		while (map->map.map[i][t])
 		{
-			if (map->map[i][t] == 'N' || map->map[i][t] == 'S' ||
-				map->map[i][t] == 'E' || map->map[i][t] == 'W')
+			if (map->map.map[i][t] == 'N' || map->map.map[i][t] == 'S' ||
+				map->map.map[i][t] == 'E' || map->map.map[i][t] == 'W')
 			{
 				ft_info_player(map, i, t);
 				c++;
@@ -98,10 +98,10 @@ int		ft_test_map(t_list_map *map)
 	char	*tmp;
 
 	i = 0;
-	while (i < map->t_map_y)
+	while (i < map->map.t_map_y)
 	{
 		t = 0;
-		tmp = map->map[i];
+		tmp = map->map.map[i];
 		if (tmp[0] == '\0')
 			return (-1);
 		while (tmp[t])
@@ -112,5 +112,5 @@ int		ft_test_map(t_list_map *map)
 		}
 		i++;
 	}
-	return (ft_no_acc_space(map->map, map->t_map_y) + ft_test_if_nsew(map));
+	return (ft_no_acc_space(map->map.map, map->map.t_map_y) + ft_test_if_nsew(map));
 }

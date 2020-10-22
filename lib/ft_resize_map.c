@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 13:29:23 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/12 15:43:46 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/10/22 17:46:38 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,15 @@ char	**ft_resize_map(t_list_map *map, int t_map)
 	res[t_map] = NULL;
 	while (i < t_map)
 	{
-		if (ft_strlen(map->map[i]) > t)
-			t = ft_strlen(map->map[i]);
+		if (ft_strlen(map->map.map[i]) > t)
+			t = ft_strlen(map->map.map[i]);
 		i++;
 	}
 	i = 0;
-	map->t_map_x = t;
+	map->map.t_map_x = t;
 	while (i < t_map)
 	{
-		res[i] = ft_resize_line(map->map[i], t);
+		res[i] = ft_resize_line(map->map.map[i], t);
 		i++;
 	}
 	return (res);
