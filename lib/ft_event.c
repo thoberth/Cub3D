@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 12:01:27 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/22 18:13:34 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/10/24 17:46:12 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ void	ft_mod_pos(int key, t_list_map *map)
 	tmpx = map->plr.Vposx / map->map.Vcubx;
 	tmpy = map->plr.Vposy / map->map.Vcuby;
 	if (key == 13)
-		map->plr.Vposy *= 1.10;
+		map->plr.Vposy += map->map.Vcuby / 4;
 	if (key == 0)
-		map->plr.Vposx *= 1.10;
+		map->plr.Vposx += map->map.Vcubx / 4;
 	if (key == 1)
-		map->plr.Vposy *= 0.9;
+		map->plr.Vposy -= map->map.Vcuby / 4;
 	if (key == 2)
-		map->plr.Vposx *= 0.9;
+		map->plr.Vposx -= map->map.Vcubx / 4;
 	if (tmpx < map->plr.Vposx / map->map.Vcubx)
 		map->plr.PosplrX--;
 	if (tmpx > map->plr.Vposx / map->map.Vcubx)

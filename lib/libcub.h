@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:08:08 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/22 18:09:04 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/10/24 18:00:39 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct	s_all
 		char	*we;
 		char	*ea;
 		char	*sprite;
-		int		reso[2];
+		float	reso[2];
 		int		f[3];
 		int		c[3];
 		int 	t_map_x;
@@ -84,6 +84,8 @@ typedef struct	s_all
 	struct		s_ray
 	{
 		int		FOV;
+		int		*dist;
+		float	ang_next_ray;
 	}			ray;
 	
 }				t_list_map;
@@ -118,5 +120,6 @@ void	ft_raycasting(t_list_map *map);
 void	ft_player(t_list_map *map);
 void	ft_write2d(t_list_map *map, int i, int t);
 void	ft_start_all(t_list_map *map);
+float	ft_dist_wall(t_list_map *map);
 
 #endif
