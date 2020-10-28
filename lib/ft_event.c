@@ -3,16 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_event.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: berthetthomas <berthetthomas@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 12:01:27 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/24 17:46:12 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/10/28 18:05:08 by berthetthom      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libcub.h"
 
 //fonction qui est appelé lorsque l'utlisateur utilise une touche au clavier.
+
+float	ft_mod_angle2(float angle)
+{
+	if (angle > 360)
+		angle -= 360;
+	if (angle < 0)
+		angle += 360;
+	return (angle);
+}
 
 void	ft_mod_angle(int key, t_list_map *map)
 {
@@ -31,23 +40,23 @@ void	ft_mod_pos(int key, t_list_map *map)
 	int		tmpx;
 	int 	tmpy;
 
-	tmpx = map->plr.Vposx / map->map.Vcubx;
-	tmpy = map->plr.Vposy / map->map.Vcuby;
+	tmpx = map->plr.Vposx / map->map.Tcub;
+	tmpy = map->plr.Vposy / map->map.Tcub;
 	if (key == 13)
-		map->plr.Vposy += map->map.Vcuby / 4;
+		map->plr.Vposy += map->map.Tcub / 4;
 	if (key == 0)
-		map->plr.Vposx += map->map.Vcubx / 4;
+		map->plr.Vposx += map->map.Tcub / 4;
 	if (key == 1)
-		map->plr.Vposy -= map->map.Vcuby / 4;
+		map->plr.Vposy -= map->map.Tcub / 4;
 	if (key == 2)
-		map->plr.Vposx -= map->map.Vcubx / 4;
-	if (tmpx < map->plr.Vposx / map->map.Vcubx)
+		map->plr.Vposx -= map->map.Tcub / 4;
+	if (tmpx < map->plr.Vposx / map->map.Tcub)
 		map->plr.PosplrX--;
-	if (tmpx > map->plr.Vposx / map->map.Vcubx)
+	if (tmpx > map->plr.Vposx / map->map.Tcub)
 		map->plr.PosplrX++;
-	if (tmpy < map->plr.Vposy / map->map.Vcuby)
+	if (tmpy < map->plr.Vposy / map->map.Tcub)
 		map->plr.PosplrY--;
-	if (tmpy > map->plr.Vposy / map->map.Vcuby)
+	if (tmpy > map->plr.Vposy / map->map.Tcub)
 		map->plr.PosplrY++;
 	ft_map2d(map);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libcub.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: berthetthomas <berthetthomas@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:08:08 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/24 18:00:39 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/10/28 18:03:25 by berthetthom      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <mlx.h>
+# include "../../minilibx/mlx.h"
 # include <math.h>
 # include "get_next_line.h"
 
@@ -48,12 +48,14 @@ typedef struct	s_all
 		char	*ea;
 		char	*sprite;
 		float	reso[2];
+		int		reso_2d[2];
 		int		f[3];
 		int		c[3];
 		int 	t_map_x;
 		int		t_map_y;
-		int		Vcubx;
-		int		Vcuby;
+		int		size_line2d;
+		int		size_line;
+		float	Tcub;
 	}			map;
 	/*
 	** Structure contenant les infos du joueur
@@ -62,8 +64,8 @@ typedef struct	s_all
 	{
 		int		PosplrX; // en case
 		int		PosplrY; //en case
-		int		Vposx;
-		int		Vposy;
+		float	Vposx;
+		float	Vposy;
 		int		Angle_plr;
 	}			plr;
 	/*
@@ -86,6 +88,7 @@ typedef struct	s_all
 		int		FOV;
 		int		*dist;
 		float	ang_next_ray;
+		float	actual_ang;
 	}			ray;
 	
 }				t_list_map;
@@ -118,8 +121,10 @@ void	ft_map2d(t_list_map *map);
 void	ft_event(t_list_map *map);
 void	ft_raycasting(t_list_map *map);
 void	ft_player(t_list_map *map);
-void	ft_write2d(t_list_map *map, int i, int t);
 void	ft_start_all(t_list_map *map);
-float	ft_dist_wall(t_list_map *map);
+int		ft_dist_wall(t_list_map *map);
+void	ft_find_reso_2d(t_list_map *map);
+float	ft_mod_angle2(float angle);
+int		ft_iswall(t_list_map *map, int i, int t);
 
 #endif
