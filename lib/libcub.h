@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libcub.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: berthetthomas <berthetthomas@student.42    +#+  +:+       +#+        */
+/*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:08:08 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/28 18:03:25 by berthetthom      ###   ########.fr       */
+/*   Updated: 2020/11/03 21:02:02 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ typedef struct	s_all
 	struct		s_plr
 	{
 		int		PosplrX; // en case
-		int		PosplrY; //en case
-		float	Vposx;
-		float	Vposy;
+		int		PosplrY; // en case
+		int		Vposx;
+		int		Vposy;
 		int		Angle_plr;
 	}			plr;
 	/*
@@ -86,9 +86,10 @@ typedef struct	s_all
 	struct		s_ray
 	{
 		int		FOV;
-		int		*dist;
+		float	*dist;
 		float	ang_next_ray;
 		float	actual_ang;
+		int		dist_to_pp;
 	}			ray;
 	
 }				t_list_map;
@@ -122,9 +123,10 @@ void	ft_event(t_list_map *map);
 void	ft_raycasting(t_list_map *map);
 void	ft_player(t_list_map *map);
 void	ft_start_all(t_list_map *map);
-int		ft_dist_wall(t_list_map *map);
+float	ft_dist_wall(t_list_map *map);
 void	ft_find_reso_2d(t_list_map *map);
 float	ft_mod_angle2(float angle);
 int		ft_iswall(t_list_map *map, int i, int t);
+void    ft_display_cub(t_list_map *map);
 
 #endif

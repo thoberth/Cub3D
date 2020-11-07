@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_event.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: berthetthomas <berthetthomas@student.42    +#+  +:+       +#+        */
+/*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 12:01:27 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/28 18:05:08 by berthetthom      ###   ########.fr       */
+/*   Updated: 2020/11/06 15:30:07 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,39 +26,41 @@ float	ft_mod_angle2(float angle)
 void	ft_mod_angle(int key, t_list_map *map)
 {
 	if (key == 123)
-		map->plr.Angle_plr -= 2;
-	if (key == 124)
 		map->plr.Angle_plr += 2;
+	if (key == 124)
+		map->plr.Angle_plr -= 2;
 	if (map->plr.Angle_plr > 360)
 		map->plr.Angle_plr -= 360;
 	if (map->plr.Angle_plr < 0)
 		map->plr.Angle_plr += 360;
+	ft_raycasting(map);
 }
 
 void	ft_mod_pos(int key, t_list_map *map)
 {
-	int		tmpx;
-	int 	tmpy;
+	float		tmpx;
+	float 	tmpy;
 
 	tmpx = map->plr.Vposx / map->map.Tcub;
 	tmpy = map->plr.Vposy / map->map.Tcub;
 	if (key == 13)
-		map->plr.Vposy += map->map.Tcub / 4;
+		map->plr.Vposy -= map->map.Tcub / 16;
 	if (key == 0)
-		map->plr.Vposx += map->map.Tcub / 4;
+		map->plr.Vposx -= map->map.Tcub / 16;
 	if (key == 1)
-		map->plr.Vposy -= map->map.Tcub / 4;
+		map->plr.Vposy += map->map.Tcub / 16;
 	if (key == 2)
-		map->plr.Vposx -= map->map.Tcub / 4;
+		map->plr.Vposx += map->map.Tcub / 16;
 	if (tmpx < map->plr.Vposx / map->map.Tcub)
-		map->plr.PosplrX--;
-	if (tmpx > map->plr.Vposx / map->map.Tcub)
 		map->plr.PosplrX++;
+	if (tmpx > map->plr.Vposx / map->map.Tcub)
+		map->plr.PosplrX--;
 	if (tmpy < map->plr.Vposy / map->map.Tcub)
-		map->plr.PosplrY--;
-	if (tmpy > map->plr.Vposy / map->map.Tcub)
 		map->plr.PosplrY++;
-	ft_map2d(map);
+	if (tmpy > map->plr.Vposy / map->map.Tcub)
+		map->plr.PosplrY--;
+	ft_raycasting(map);
+	//ft_map2d(map);
 }
 
 int		close_window(t_list_map *map)

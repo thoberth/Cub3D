@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: berthetthomas <berthetthomas@student.42    +#+  +:+       +#+        */
+/*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 12:11:42 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/28 19:04:52 by berthetthom      ###   ########.fr       */
+/*   Updated: 2020/11/01 11:36:04 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,5 @@ void		ft_putnbr(int nb)
 		i /= 10;
 	}
 	ft_putchar(number + 48);
-	ft_putchar('\n');
+	ft_putchar(' ');
 }

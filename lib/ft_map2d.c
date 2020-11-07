@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map2d.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: berthetthomas <berthetthomas@student.42    +#+  +:+       +#+        */
+/*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/15 12:52:36 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/27 19:45:34 by berthetthom      ###   ########.fr       */
+/*   Created: 2020/10/30 15:51:33 by berthetthom       #+#    #+#             */
+/*   Updated: 2020/11/06 16:02:03 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,10 @@ void	ft_map2d(t_list_map *map)
 	bpp = 0;
 	map->map.size_line2d = 0;
 	endian = 0;
-	map->data.img_ptr_minimap = mlx_new_image(map->data.mlx_ptr, map->map.reso_2d[0],
-		map->map.reso_2d[1]);
-	map->data.data_addr_minimap = mlx_get_data_addr(map->data.img_ptr_minimap, &bpp,
-		&map->map.size_line2d, &endian);
+	map->data.img_ptr_minimap = mlx_new_image(map->data.mlx_ptr,
+		map->map.reso_2d[0], map->map.reso_2d[1]);
+	map->data.data_addr_minimap = mlx_get_data_addr(map->data.img_ptr_minimap,
+		&bpp, &map->map.size_line2d, &endian);
 	ft_aff_map2d(map);
 	mlx_put_image_to_window(map->data.mlx_ptr, map->data.win_ptr,
 		map->data.img_ptr_minimap, 0, 0);
