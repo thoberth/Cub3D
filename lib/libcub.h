@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:08:08 by thoberth          #+#    #+#             */
-/*   Updated: 2020/11/03 21:02:02 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/11/12 20:09:07 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct	s_all
 	*/
 	struct		s_data
 	{
+		int		is_2d;
 		void	*mlx_ptr;
 		void	*win_ptr;
 		void	*img_ptr;
@@ -85,12 +86,27 @@ typedef struct	s_all
 	*/
 	struct		s_ray
 	{
-		int		FOV;
+		int		fov;
+		int		*wall_tex;
 		float	*dist;
 		float	ang_next_ray;
 		float	actual_ang;
 		int		dist_to_pp;
 	}			ray;
+	/*
+	** Structure contenant les variables du display_cub
+	*/
+	struct		s_dis
+	{
+		int     i;
+    	int     color_wall;
+    	int     t;
+    	int     a;
+    	int     tmp;
+    	int     dist;
+    	int     dist_fc;
+	}			dis;
+	
 	
 }				t_list_map;
 
@@ -98,7 +114,7 @@ typedef struct	s_all
 ** Fonctions
 */
 int		ft_detect_map(t_list_map *map,char *line);
-int 	ft_init_map(t_list_map *map, char *cub);
+int		ft_init_map(t_list_map *map, char *cub);
 void	ft_init_map2(t_list_map *map);
 int		ft_test_info_map(t_list_map *map);
 int     ft_return_error(void);
@@ -123,10 +139,15 @@ void	ft_event(t_list_map *map);
 void	ft_raycasting(t_list_map *map);
 void	ft_player(t_list_map *map);
 void	ft_start_all(t_list_map *map);
-float	ft_dist_wall(t_list_map *map);
+float	ft_dist_wall(t_list_map *map, int i);
 void	ft_find_reso_2d(t_list_map *map);
 float	ft_mod_angle2(float angle);
-int		ft_iswall(t_list_map *map, int i, int t);
+int		ft_iswall(t_list_map *map, int t, int i, int v);
 void    ft_display_cub(t_list_map *map);
+float 	ft_dist_wall2h(t_list_map *map, float ax, float ay);
+float 	ft_dist_wall2v(t_list_map *map, float ax, float ay);
+float	ft_dist_wall3(t_list_map *map, float nx, float ny);
+void	ft_mod_pos2(int key, t_list_map *map, int vitesse);
+int     ft_detect_wall(t_list_map *map, int x, int y);
 
 #endif

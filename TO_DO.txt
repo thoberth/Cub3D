@@ -1,0 +1,13 @@
+lundi 9 novembre :
+
+-> texturer en fonction de N S E W
+-> regler le probleme de la minimap et creer un event avec la touche 'M' et
+    une var == 1 si on doit afficher la minimap et 0 le cas echeant.
+-> pouvoir se deplacer sur les axes x et y tout en changeant
+    l'angle de direction du joueur
+-> ajouter les sprites, puis les texturer
+-> regler le probleme du a rezise map qui fait segfault, a cause de t_max_x
+    ou t_max_y  ------> creer un tableau qui connais le dernier mur de chaque ligne
+                ou
+                ------> changer la maniere d'eviter le segfault en n'utilisant pas
+                        les variables precedemment cités

@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 12:01:27 by thoberth          #+#    #+#             */
-/*   Updated: 2020/11/06 15:30:07 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/11/11 15:57:59 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,14 @@ void	ft_mod_angle(int key, t_list_map *map)
 
 void	ft_mod_pos(int key, t_list_map *map)
 {
-	float		tmpx;
+	float	tmpx;
 	float 	tmpy;
+	int 	vitesse;
 
 	tmpx = map->plr.Vposx / map->map.Tcub;
 	tmpy = map->plr.Vposy / map->map.Tcub;
-	if (key == 13)
-		map->plr.Vposy -= map->map.Tcub / 16;
-	if (key == 0)
-		map->plr.Vposx -= map->map.Tcub / 16;
-	if (key == 1)
-		map->plr.Vposy += map->map.Tcub / 16;
-	if (key == 2)
-		map->plr.Vposx += map->map.Tcub / 16;
+	vitesse = map->map.Tcub / 16;
+	ft_mod_pos2(key, map, vitesse);
 	if (tmpx < map->plr.Vposx / map->map.Tcub)
 		map->plr.PosplrX++;
 	if (tmpx > map->plr.Vposx / map->map.Tcub)
@@ -71,6 +66,28 @@ int		close_window(t_list_map *map)
 	return (0);
 }
 
+void	ft_launch_map2d(t_list_map *map)
+{
+	if (map->data.is_2d == 0)
+	{
+		map->data.is_2d = 1;
+		ft_map2d(map);
+	}
+	else
+	{
+		map->data.is_2d = 0;
+		ft_raycasting(map);
+	}
+}
+
+int		deal_key1(int key, t_list_map *map)
+{
+	ft_putnbr(key);
+	if (key == 1)
+		ft_launch_map2d(map);
+	return (0);
+}
+
 int		deal_key(int key, t_list_map *map)
 {
 	if (key == 53)
@@ -84,8 +101,8 @@ int		deal_key(int key, t_list_map *map)
 
 void	ft_event(t_list_map *map)
 {
-	mlx_key_hook(map->data.win_ptr, deal_key, map);
-	mlx_hook(map->data.win_ptr, 2, 0, deal_key, map);
-	mlx_hook(map->data.win_ptr, 3, 0, deal_key, map);
+	mlx_key_hook(map->data.win_ptr, deal_key1, map);
+	mlx_hook(map->data.win_ptr, 2, 1L<<0, deal_key, map);
+	mlx_hook(map->data.win_ptr, 3, 1L<<1, deal_key, map);
 	mlx_hook(map->data.win_ptr, 17, 1L<<17, close_window, map);
 }
