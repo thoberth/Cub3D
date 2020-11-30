@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/18 10:07:53 by thoberth          #+#    #+#             */
-/*   Updated: 2020/11/28 15:00:58 by thoberth         ###   ########.fr       */
+/*   Created: 2020/11/22 00:18:26 by thoberth          #+#    #+#             */
+/*   Updated: 2020/11/22 00:18:28 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib/libcub.h"
+#include "libcub.h"
 
-int main (int argc, char **argv)
+int		ft_strcmp(const char *s1, const char *s2)
 {
-	t_list_map	map;
-	
-	if (ft_init_map(&map, argv[1]) == -1)
-		ft_return_error();
-	if (argc != 2)
+	int		i;
+
+	i = 0;
+	while (s1[i] || s2[i])
 	{
-		if (argc == 3 && ft_strcmp(argv[2], "--save") == 0)
-			map.map.save = 1;
-		else
-		{
-			ft_putstr("Invalid number of argument.");
-			map.map.save = 0;
-			ft_return_error();
-		}
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		i++;
 	}
-	ft_start_all(&map);
 	return (0);
 }

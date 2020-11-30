@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_verif_reso.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/18 10:07:53 by thoberth          #+#    #+#             */
-/*   Updated: 2020/11/28 15:00:58 by thoberth         ###   ########.fr       */
+/*   Created: 2020/11/22 01:18:06 by thoberth          #+#    #+#             */
+/*   Updated: 2020/11/22 21:22:15 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib/libcub.h"
+#include "libcub.h"
 
-int main (int argc, char **argv)
+void    ft_verif_reso(t_list_map *map)
 {
-	t_list_map	map;
-	
-	if (ft_init_map(&map, argv[1]) == -1)
-		ft_return_error();
-	if (argc != 2)
-	{
-		if (argc == 3 && ft_strcmp(argv[2], "--save") == 0)
-			map.map.save = 1;
-		else
-		{
-			ft_putstr("Invalid number of argument.");
-			map.map.save = 0;
-			ft_return_error();
-		}
-	}
-	ft_start_all(&map);
-	return (0);
+    int     a;
+    int     b;
+
 }

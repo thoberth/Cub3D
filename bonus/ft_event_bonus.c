@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_event.c                                         :+:      :+:    :+:   */
+/*   ft_event_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 12:01:27 by thoberth          #+#    #+#             */
-/*   Updated: 2020/11/30 12:58:30 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/11/30 12:57:26 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	ft_mod_angle(int key, t_list_map *map)
 	if (map->plr.Angle_plr < 0)
 		map->plr.Angle_plr += 360;
 	ft_raycasting(map);
+	if (map->data.is_2d == 1)
+		ft_map2d(map);
 }
 
 void	ft_mod_pos(int key, t_list_map *map)
@@ -45,7 +47,7 @@ void	ft_mod_pos(int key, t_list_map *map)
 	tmpx = map->plr.Vposx / map->map.Tcub;
 	tmpy = map->plr.Vposy / map->map.Tcub;
 	vitesse = map->map.Tcub / 16;
-	ft_mod_pos2(key, map, vitesse);
+	ft_mod_pos2_bonus(key, map, vitesse);
 	if (tmpx < map->plr.Vposx / map->map.Tcub)
 		map->plr.PosplrX++;
 	if (tmpx > map->plr.Vposx / map->map.Tcub)
@@ -55,6 +57,8 @@ void	ft_mod_pos(int key, t_list_map *map)
 	if (tmpy > map->plr.Vposy / map->map.Tcub)
 		map->plr.PosplrY--;
 	ft_raycasting(map);
+	if (map->data.is_2d == 1)
+		ft_map2d(map);
 }
 
 int		close_window(t_list_map *map)
@@ -67,11 +71,26 @@ int		close_window(t_list_map *map)
 
 int		deal_key1(int key, t_list_map *map)
 {
+	if (key == 46 && map->data.is_2d == -1)
+		map->data.is_2d = 1;
+	if (key == 46 && map->data.is_2d == 2)
+		map->data.is_2d = 0;
 	return (0);
 }
 
 int		deal_key(int key, t_list_map *map)
 {
+	if (key == 46 && map->data.is_2d == 0)
+	{
+		map->data.is_2d = -1;
+		ft_map2d(map);
+	}
+	if (key == 46 && map->data.is_2d == 1)
+	{
+		map->data.is_2d = 2;
+		mlx_destroy_image(map->data.mlx_ptr, map->data.img_ptr);
+		ft_raycasting(map);
+	}
 	if (key == 53)
 		close_window(map);
 	if (key == 123 || key == 124)

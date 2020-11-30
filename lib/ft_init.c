@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: berthetthomas <berthetthomas@student.42    +#+  +:+       +#+        */
+/*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:07:32 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/26 14:00:53 by berthetthom      ###   ########.fr       */
+/*   Updated: 2020/11/22 21:34:21 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_init_map2(t_list_map	*map)
 	map->map.ea = NULL;
 	map->map.we = NULL;
 	map->map.sprite = NULL;
+	map->data.is_2d = 0;
 	map->data.mlx_ptr = 0;
 	map->data.win_ptr = 0;
 	map->data.img_ptr = 0;
@@ -39,6 +40,8 @@ int		ft_detect_map(t_list_map *map, char *line)
 	int i;
 
 	i = 0;
+	while(line[i] == ' ')
+		i++;
 	if (line[i] == 'R')
 	{
 		map->verif.last_verif++;
@@ -48,41 +51,42 @@ int		ft_detect_map(t_list_map *map, char *line)
 		while (line[i] >= '0' && line[i] <= '9')
 			i++;
 		map->map.reso[1] = ft_atoi(&line[i]);
+		//ft_verif_reso(map);
 	}
 	else if (line[i] == 'S' && line[i + 1] == 'O')
 	{
 		map->verif.last_verif++;
 		while (line[i] != ' ')
 			i++;
-		map->map.so = ft_strdup(&line[i++]);
+		map->map.so = ft_strdup(&line[++i]);
 	}
 	else if (line[i] == 'N' && line[i + 1] == 'O')
 	{
 		map->verif.last_verif++;
 		while (line[i] != ' ')
 			i++;
-		map->map.no = ft_strdup(&line[i++]);
+		map->map.no = ft_strdup(&line[++i]);
 	}
 	else if (line[i] == 'W' && line[i + 1] == 'E')
 	{
 		map->verif.last_verif++;
 		while (line[i] != ' ')
 			i++;
-		map->map.we = ft_strdup(&line[i++]);
+		map->map.we = ft_strdup(&line[++i]);
 	}
 	else if (line[i] == 'E' && line[i + 1] == 'A')
 	{
 		map->verif.last_verif++;
 		while (line[i] != ' ')
 			i++;
-		map->map.ea = ft_strdup(&line[i++]);
+		map->map.ea = ft_strdup(&line[++i]);
 	}
 	else if (line[i] == 'S')
 	{
 		map->verif.last_verif++;
 		while (line[i] != ' ')
 			i++;
-		map->map.sprite = ft_strdup(&line[i++]);
+		map->map.sprite = ft_strdup(&line[++i]);
 	}
 	else if (line[i] == 'F')
 	{
@@ -126,7 +130,7 @@ int		ft_init_map(t_list_map *map, char *cub)
 	while ((taille_lu = get_next_line(fd, &line)) > 0)
 	{
 		if (map->verif.last_verif < 8)
-			ft_detect_map(map, line); //verif et recuperation des donnees de la map
+			ft_detect_map(map, line);
 		else if (map->verif.last_verif == 8 && (line[0] != '\0' || map->map.t_map_y > 0))
 			map->map.map = ft_line_to_array_of_str(map->map.map, line, map->map.t_map_y++);
 		free(line);
@@ -140,11 +144,3 @@ int		ft_init_map(t_list_map *map, char *cub)
 		return(ft_return_error());
 	return (0);
 }
-
-	/*for (int i = 0; map->map[i] != 0; i++)
-	{
-		ft_putstr(map->map[i]);
-		ft_putchar('\n');
-	}
-	printf("no =%s\nso =%s\nwe =%s\nea =%s\nsprite =%s\n", map->no, map->so, map->we, map->ea, map->sprite);
-	printf("reso = %i %i\ncouleur sol = %i,%i,%i\ncouleur plafond = %i,%i,%i\n", map->reso[0], map->reso[1], map->f[0], map->f[1], map->f[2], map->c[0], map->c[1], map->c[2]);*/

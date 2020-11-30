@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 15:51:33 by berthetthom       #+#    #+#             */
-/*   Updated: 2020/11/06 16:02:03 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/11/16 13:26:41 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void	ft_aff_map2d(t_list_map *map)
 		}
 		i++;
 	}
-	ft_write2d(map, map->plr.PosplrY, map->plr.PosplrX);
+	ft_write2d(map, map->plr.Vposy / map->map.Tcub,
+		map->plr.Vposx / map->map.Tcub);
 }
 
 void	ft_find_reso_2d(t_list_map *map)
@@ -86,6 +87,19 @@ void	ft_find_reso_2d(t_list_map *map)
 	}
 }
 
+void	ft_do_trans2d(t_list_map *map)
+{
+	int		i;
+
+	i = 3;
+
+	while (i < (map->map.size_line2d * map->map.reso_2d[1]))
+	{
+		map->data.data_addr_minimap[i] = 75;
+		i += 4;
+	}
+}
+
 void	ft_map2d(t_list_map *map)
 {
 	int		bpp;
@@ -98,7 +112,8 @@ void	ft_map2d(t_list_map *map)
 		map->map.reso_2d[0], map->map.reso_2d[1]);
 	map->data.data_addr_minimap = mlx_get_data_addr(map->data.img_ptr_minimap,
 		&bpp, &map->map.size_line2d, &endian);
+	ft_do_trans2d(map);
 	ft_aff_map2d(map);
 	mlx_put_image_to_window(map->data.mlx_ptr, map->data.win_ptr,
-		map->data.img_ptr_minimap, 0, 0);
+		map->data.img_ptr_minimap, 5 , 5);
 }

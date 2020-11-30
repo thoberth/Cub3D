@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:08:08 by thoberth          #+#    #+#             */
-/*   Updated: 2020/11/12 20:09:07 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/11/28 15:33:35 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct	s_all
 		int		t_map_y;
 		int		size_line2d;
 		int		size_line;
+		int 	save;
 		float	Tcub;
 	}			map;
 	/*
@@ -87,7 +88,6 @@ typedef struct	s_all
 	struct		s_ray
 	{
 		int		fov;
-		int		*wall_tex;
 		float	*dist;
 		float	ang_next_ray;
 		float	actual_ang;
@@ -98,15 +98,31 @@ typedef struct	s_all
 	*/
 	struct		s_dis
 	{
-		int     i;
     	int     color_wall;
-    	int     t;
-    	int     a;
-    	int     tmp;
-    	int     dist;
-    	int     dist_fc;
+    	int     t_wall;
+    	int     t_fc;
 	}			dis;
-	
+	/*
+	** Structure contenant les variables des texture
+	*/
+	struct		s_tex
+	{
+		char 	*texno;
+		int		t_no[2];
+		char 	*texso;
+		int		t_so[2];
+		char 	*texea;
+		int		t_ea[2];
+		char 	*texwe;
+		int		t_we[2];
+		char 	*texs;
+		int		t_s[2];
+		int		sizeline;
+		int		bpp;
+		int		endian;
+		int 	**wall_tex;
+		float	line;
+	}			tex;
 	
 }				t_list_map;
 
@@ -144,10 +160,16 @@ void	ft_find_reso_2d(t_list_map *map);
 float	ft_mod_angle2(float angle);
 int		ft_iswall(t_list_map *map, int t, int i, int v);
 void    ft_display_cub(t_list_map *map);
-float 	ft_dist_wall2h(t_list_map *map, float ax, float ay);
-float 	ft_dist_wall2v(t_list_map *map, float ax, float ay);
+float 	ft_dist_wall2h(t_list_map *map, float ax, float ay, int i);
+float 	ft_dist_wall2v(t_list_map *map, float ax, float ay, int i);
 float	ft_dist_wall3(t_list_map *map, float nx, float ny);
 void	ft_mod_pos2(int key, t_list_map *map, int vitesse);
 int     ft_detect_wall(t_list_map *map, int x, int y);
+void	ft_recup_data_tex(t_list_map *map);
+void    ft_display(t_list_map *map);
+int		ft_strcmp(const char *s1, const char *s2);
+int     ft_display_walltex(t_list_map *map, int i, int *tab, char *str);
+int		ft_texture(t_list_map *map, int a, int i);
+void	ft_init_var(t_list_map *map);
 
 #endif

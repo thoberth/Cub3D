@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 17:59:58 by thoberth          #+#    #+#             */
-/*   Updated: 2020/11/12 21:08:12 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/11/18 12:34:01 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ float		ft_dist_wall3(t_list_map *map, float nx, float ny)
 	return (result);
 }
 
-float		ft_dist_wallh(t_list_map *map)
+float		ft_dist_wallh(t_list_map *map, int i)
 {
 	float 	ay;
 	float	ax;
@@ -34,13 +34,15 @@ float		ft_dist_wallh(t_list_map *map)
 		ax = 0;
 	if (ax > (map->map.Tcub * map->map.t_map_x) - 1)
 		ax = (map->map.Tcub * map->map.t_map_x) - 1;
-	ft_putstr ("new = ");
 	if (ft_iswall(map, ax, ay, 0) == 1)
+	{
+		map->tex.wall_tex[i][1] = ax;
 		return (ft_dist_wall3(map, ax, ay));
-	return (ft_dist_wall2h(map, ax, ay));
+	}
+	return (ft_dist_wall2h(map, ax, ay, i));
 }
 
-float		ft_dist_wallv(t_list_map *map)
+float		ft_dist_wallv(t_list_map *map, int i)
 {
 	float 	ay;
 	float	ax;
@@ -55,8 +57,11 @@ float		ft_dist_wallv(t_list_map *map)
 	if (ay > ((map->map.Tcub * map->map.t_map_y) - 1))
 		ay = (map->map.Tcub * map->map.t_map_y) - 1;
 	if (ft_iswall(map, ax, ay, 1) == 1)
+	{
+		map->tex.wall_tex[i][2] = ay;
 		return (ft_dist_wall3(map, ax, ay));
-	return (ft_dist_wall2v(map, ax, ay));
+	}
+	return (ft_dist_wall2v(map, ax, ay, i));
 }
 
 /*
@@ -67,19 +72,19 @@ float		ft_dist_wall(t_list_map *map, int i)
 	float	a;
 	float	b;
 
-	a = ft_dist_wallv(map);
-	b = ft_dist_wallh(map);
+	a = ft_dist_wallv(map, i);
+	b = ft_dist_wallh(map, i);
 	if (a < b)
 	{
 		if (map->ray.actual_ang > 90 && map->ray.actual_ang < 270)
-			map->ray.wall_tex[i] = 2;
+			map->tex.wall_tex[i][0] = 2;
 		else
-			map->ray.wall_tex[i] = 3;
+			map->tex.wall_tex[i][0] = 3;
 		return (a);
 	}
 	if (map->ray.actual_ang > 0 && map->ray.actual_ang < 180)
-		map->ray.wall_tex[i] = 0;
+		map->tex.wall_tex[i][0] = 0;
 	else
-		map->ray.wall_tex[i] = 1;
+		map->tex.wall_tex[i][0] = 1;
 	return (b);
 }

@@ -6,13 +6,13 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 20:03:14 by thoberth          #+#    #+#             */
-/*   Updated: 2020/11/12 21:12:08 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/11/18 12:49:49 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libcub.h"
 
-float 	ft_dist_wall2h(t_list_map *map, float ax, float ay)
+float 	ft_dist_wall2h(t_list_map *map, float ax, float ay, int i)
 {
 	float		dx;
 	float		dy;
@@ -36,11 +36,14 @@ float 	ft_dist_wall2h(t_list_map *map, float ax, float ay)
 	if (nx > (map->map.Tcub * map->map.t_map_x) - 1)
 		nx = (map->map.Tcub * map->map.t_map_x) - 1;
 	if (ft_iswall(map, nx, ny, 0) == 1)
+	{
+		map->tex.wall_tex[i][1] = nx;
 		return (ft_dist_wall3(map, nx, ny));
-	return (ft_dist_wall2h(map, nx, ny));
+	}
+	return (ft_dist_wall2h(map, nx, ny, i));
 }
 
-float 	ft_dist_wall2v(t_list_map *map, float ax, float ay)
+float 	ft_dist_wall2v(t_list_map *map, float ax, float ay, int i)
 {
 	float		dx;
 	float		dy;
@@ -59,11 +62,13 @@ float 	ft_dist_wall2v(t_list_map *map, float ax, float ay)
 	}
 	nx = ax + dx;
 	ny = ay + dy;
-	if (ny < 0)
-		ny = 0;
+	ny = (ny < 0 ? 0 : ny); 
 	if (ny > ((map->map.Tcub * map->map.t_map_y) - 1))
 		ny = (map->map.Tcub * map->map.t_map_y) - 1;
 	if (ft_iswall(map, nx, ny, 1) == 1)
+	{
+		map->tex.wall_tex[i][2] = ny;
 		return (ft_dist_wall3(map, nx, ny));
-	return (ft_dist_wall2v(map, nx, ny));
+	}
+	return (ft_dist_wall2v(map, nx, ny, i));
 }
