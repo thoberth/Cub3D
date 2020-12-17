@@ -6,24 +6,24 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 17:59:58 by thoberth          #+#    #+#             */
-/*   Updated: 2020/11/18 12:34:01 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/12/17 16:42:47 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libcub.h"
 
-float		ft_dist_wall3(t_list_map *map, float nx, float ny)
+float	ft_dist_wall3(t_list_map *map, float nx, float ny)
 {
-	float result;
+	float	result;
 
 	result = sqrt(pow(map->plr.Vposx - nx, 2) + pow(map->plr.Vposy - ny, 2));
 	return (result);
 }
 
-float		ft_dist_wallh(t_list_map *map, int i)
+float	ft_dist_wallh(t_list_map *map, int i)
 {
-	float 	ay;
 	float	ax;
+	float	ay;
 
 	ay = (int)(map->plr.Vposy / map->map.Tcub) * map->map.Tcub;
 	if (map->ray.actual_ang < 360 && map->ray.actual_ang > 180)
@@ -34,18 +34,25 @@ float		ft_dist_wallh(t_list_map *map, int i)
 		ax = 0;
 	if (ax > (map->map.Tcub * map->map.t_map_x) - 1)
 		ax = (map->map.Tcub * map->map.t_map_x) - 1;
-	if (ft_iswall(map, ax, ay, 0) == 1)
+	if (ft_iswall(map, ax, ay, 0) == 1 || ft_iswall(map, ax, ay, 0) == 3)
 	{
 		map->tex.wall_tex[i][1] = ax;
 		return (ft_dist_wall3(map, ax, ay));
 	}
+	if (ft_iswall(map, ax, ay, 0) == 2)
+	{
+		map->ray.is_sprite[i][0] = 1;
+		map->ray.is_sprite[i][1] = map->ray.tmp_sprite[0];
+		map->ray.is_sprite[i][2] = map->ray.tmp_sprite[1];
+	}
+	ft_calcul_deltah(map);
 	return (ft_dist_wall2h(map, ax, ay, i));
 }
 
-float		ft_dist_wallv(t_list_map *map, int i)
+float	ft_dist_wallv(t_list_map *map, int i)
 {
-	float 	ay;
 	float	ax;
+	float	ay;
 
 	ax = (int)(map->plr.Vposx / map->map.Tcub) * map->map.Tcub;
 	if (!(map->ray.actual_ang >= 90 && map->ray.actual_ang <= 270))
@@ -56,18 +63,26 @@ float		ft_dist_wallv(t_list_map *map, int i)
 		ay = 0;
 	if (ay > ((map->map.Tcub * map->map.t_map_y) - 1))
 		ay = (map->map.Tcub * map->map.t_map_y) - 1;
-	if (ft_iswall(map, ax, ay, 1) == 1)
+	if (ft_iswall(map, ax, ay, 1) == 1 || ft_iswall(map, ax, ay, 0) == 3)
 	{
 		map->tex.wall_tex[i][2] = ay;
 		return (ft_dist_wall3(map, ax, ay));
 	}
+	if (ft_iswall(map, ax, ay, 1) == 2)
+	{
+		map->ray.is_sprite[i][0] = 1;
+		map->ray.is_sprite[i][1] = map->ray.tmp_sprite[0];
+		map->ray.is_sprite[i][2] = map->ray.tmp_sprite[1];
+	}
+	ft_calcul_deltav(map);
 	return (ft_dist_wall2v(map, ax, ay, i));
 }
 
 /*
-// N = 0, S = 1, E = 2, W = 3 
+** N = 0, S = 1, E = 2, W = 3
 */
-float		ft_dist_wall(t_list_map *map, int i)
+
+float	ft_dist_wall(t_list_map *map, int i)
 {
 	float	a;
 	float	b;
@@ -77,9 +92,9 @@ float		ft_dist_wall(t_list_map *map, int i)
 	if (a < b)
 	{
 		if (map->ray.actual_ang > 90 && map->ray.actual_ang < 270)
-			map->tex.wall_tex[i][0] = 2;
-		else
 			map->tex.wall_tex[i][0] = 3;
+		else
+			map->tex.wall_tex[i][0] = 2;
 		return (a);
 	}
 	if (map->ray.actual_ang > 0 && map->ray.actual_ang < 180)

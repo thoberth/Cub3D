@@ -6,13 +6,13 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:07:32 by thoberth          #+#    #+#             */
-/*   Updated: 2020/11/22 21:34:21 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/12/17 16:31:53 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libcub.h"
 
-void	ft_init_map2(t_list_map	*map)
+void	ft_init_map2(t_list_map *map)
 {
 	map->verif.verif_reso = 0;
 	map->verif.verif_f = 0;
@@ -37,10 +37,10 @@ void	ft_init_map2(t_list_map	*map)
 
 int		ft_detect_map(t_list_map *map, char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(line[i] == ' ')
+	while (line[i] == ' ')
 		i++;
 	if (line[i] == 'R')
 	{
@@ -51,7 +51,7 @@ int		ft_detect_map(t_list_map *map, char *line)
 		while (line[i] >= '0' && line[i] <= '9')
 			i++;
 		map->map.reso[1] = ft_atoi(&line[i]);
-		//ft_verif_reso(map);
+		ft_verif_reso(map);
 	}
 	else if (line[i] == 'S' && line[i + 1] == 'O')
 	{
@@ -131,16 +131,19 @@ int		ft_init_map(t_list_map *map, char *cub)
 	{
 		if (map->verif.last_verif < 8)
 			ft_detect_map(map, line);
-		else if (map->verif.last_verif == 8 && (line[0] != '\0' || map->map.t_map_y > 0))
-			map->map.map = ft_line_to_array_of_str(map->map.map, line, map->map.t_map_y++);
+		else if (map->verif.last_verif == 8 && (line[0] != '\0' ||
+			map->map.t_map_y > 0))
+			map->map.map = ft_line_to_array_of_str(map->map.map,
+				line, map->map.t_map_y++);
 		free(line);
 	}
 	if (map->verif.last_verif == 8)
-		map->map.map = ft_line_to_array_of_str(map->map.map, line, map->map.t_map_y++);
+		map->map.map = ft_line_to_array_of_str(map->map.map,
+			line, map->map.t_map_y++);
 	free(line);
 	map->map.map = ft_resize_map(map, map->map.t_map_y);
-	if (map->verif.last_verif != 8 || close(fd) == -1 || ft_test_info_map(map) == -1 ||
-		ft_test_map(map) < 0)
-		return(ft_return_error());
+	if (map->verif.last_verif != 8 || close(fd) == -1 ||
+		ft_test_info_map(map) == -1 || ft_test_map(map) < 0)
+		return (ft_return_error());
 	return (0);
 }

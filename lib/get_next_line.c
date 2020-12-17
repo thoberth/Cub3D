@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 13:30:19 by thoberth          #+#    #+#             */
-/*   Updated: 2020/09/18 11:35:59 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/12/17 15:51:20 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int		get_next_line(int fd, char **line)
 {
 	int				taille_lu;
 	char			buf[BUFFER_SIZE + 1];
-	static char		*tmp[OPEN_MAX];// tableau de string ou t[1] est le premier fd ouvert etc
+	static char		*tmp[OPEN_MAX];
 
 	if (fd < 0 || fd > OPEN_MAX || !line || BUFFER_SIZE <= 0
 		|| read(fd, buf, 0) < 0)

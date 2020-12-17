@@ -6,14 +6,16 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:08:08 by thoberth          #+#    #+#             */
-/*   Updated: 2020/11/28 15:33:35 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/12/15 10:49:55 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBCUB_H
 # define LIBCUB_H
-# define BUF_SIZE 5
+# define BUF_SIZE 75
 # include <stdio.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -35,6 +37,7 @@ typedef struct	s_all
 		int		verif_f; //0 si reso non defini un si def
 		int		verif_c; //0 si reso non defini un si def
 		int		last_verif; //incrementez a chaque info fournie donc si diff de 8 <- Error
+		int		save;
 	}			verif;
 	/*
 	** Structure contenant les infos de la map
@@ -55,7 +58,6 @@ typedef struct	s_all
 		int		t_map_y;
 		int		size_line2d;
 		int		size_line;
-		int 	save;
 		float	Tcub;
 	}			map;
 	/*
@@ -92,6 +94,9 @@ typedef struct	s_all
 		float	ang_next_ray;
 		float	actual_ang;
 		int		dist_to_pp;
+		int		**is_sprite;
+		int		tmp_sprite[2];
+		float	delta[2];
 	}			ray;
 	/*
 	** Structure contenant les variables du display_cub
@@ -123,8 +128,35 @@ typedef struct	s_all
 		int 	**wall_tex;
 		float	line;
 	}			tex;
-	
 }				t_list_map;
+
+typedef	struct 			s_bpm
+{
+	struct				s_bmpfh
+	{
+		unsigned short	bf_debug;
+		unsigned char	bf_type[2];
+		unsigned int	bf_sizefile;
+		unsigned short	bf_reserved1;
+		unsigned short	bf_reserved2;
+		unsigned int	bf_offset;
+	}					bmp_fh;
+	struct				s_bmpih
+	{
+		unsigned int	bi_hsize;
+		unsigned int	bi_width;
+		unsigned int	bi_height;
+		unsigned short	bi_planes;
+		unsigned short	bi_bpp;
+		unsigned int	bi_comp;
+		unsigned int	bi_sizeimg;
+		unsigned int	bi_ppmx;
+		unsigned int	bi_ppmy;
+		unsigned int 	bi_clrused;
+		unsigned int	bi_clrmajor;
+	}					bmp_ih;
+}						t_bmp;
+
 
 /*
 ** Fonctions
@@ -171,5 +203,12 @@ int		ft_strcmp(const char *s1, const char *s2);
 int     ft_display_walltex(t_list_map *map, int i, int *tab, char *str);
 int		ft_texture(t_list_map *map, int a, int i);
 void	ft_init_var(t_list_map *map);
+void    ft_verif_reso(t_list_map *map);
+void    ft_save(t_list_map *map);
+int		ft_open(int fd);
+void    ft_close(int fd);
+void	ft_calcul_deltav(t_list_map *map);
+void	ft_calcul_deltah(t_list_map *map);
+void    ft_sprite(t_list_map *map);
 
 #endif

@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_verif_reso.c                                    :+:      :+:    :+:   */
+/*   ft_file_manip.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/22 01:18:06 by thoberth          #+#    #+#             */
-/*   Updated: 2020/12/17 16:01:44 by thoberth         ###   ########.fr       */
+/*   Created: 2020/12/03 18:17:36 by thoberth          #+#    #+#             */
+/*   Updated: 2020/12/17 16:27:54 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libcub.h"
 
-void	ft_verif_reso(t_list_map *map)
+int		ft_open(int fd)
 {
-	int	a;
-	int	b;
+	fd = open("img.bmp", O_WRONLY | O_CREAT | O_APPEND | O_TRUNC, 0644);
+	if (fd == -1)
+		ft_return_error();
+	return (fd);
+}
 
-	mlx_get_screen_size(map->data.mlx_ptr, &a, &b);
-	b -= 50;
-	map->map.reso[0] = (map->map.reso[0] > a ? a : map->map.reso[0]);
-	map->map.reso[1] = (map->map.reso[1] > b ? b : map->map.reso[1]);
+void	ft_close(int fd)
+{
+	fd = close(fd);
+	if (fd == -1)
+		ft_return_error();
 }

@@ -6,15 +6,17 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 15:55:07 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/05 16:36:29 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/12/17 15:50:28 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libcub.h"
 
-/* ces fonctions testent:
--> que la map est bien entouré de '1' horizontalement
+/*
+** ces fonctions testent:
+** -> que la map est bien entouré de '1' horizontalement
 */
+
 int		ft_verif_first1_h(char *ligne, int t)
 {
 	t--;
@@ -59,7 +61,7 @@ int		ft_circled_of_1_horizontal(char **map, int t_map)
 			if (c == 1)
 				res = ft_verif_first1_h(map[i], t);
 			else if (c > 1)
-				res = ft_verif_last1_h(map[i], ft_strlen(map[i]) -1);
+				res = ft_verif_last1_h(map[i], ft_strlen(map[i]) - 1);
 			t++;
 		}
 		if (c == 0 || c == 1 || res == -1)

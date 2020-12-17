@@ -6,15 +6,17 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 12:41:18 by thoberth          #+#    #+#             */
-/*   Updated: 2020/10/05 16:37:13 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/12/17 16:36:21 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libcub.h"
 
-/* ces fonctions testent:
--> que la map est bien entouré de '1' verticalement
+/*
+** ces fonctions testent:
+** que la map est bien entouré de '1' verticalement
 */
+
 int		ft_verif_1_vertical(char **map, int t_map, int i, int t)
 {
 	while (i < t_map - 1 && map[i][t] == ' ')
@@ -31,7 +33,7 @@ int		ft_verif_1_vertical(char **map, int t_map, int i, int t)
 
 int		ft_circled_of_1_vertical(char **map, int t_map)
 {
-	int 	i;
+	int		i;
 	int		t;
 
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 14:59:00 by thoberth          #+#    #+#             */
-/*   Updated: 2020/11/30 13:02:30 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/12/17 16:14:31 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ void	ft_start_all(t_list_map *map)
 	ft_init_var(map);
 	ft_raycasting(map);
 	ft_event(map);
+	if (map->verif.save == 1)
+		ft_save(map);
 	mlx_loop(map->data.mlx_ptr);
 }

@@ -6,13 +6,15 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 12:01:27 by thoberth          #+#    #+#             */
-/*   Updated: 2020/11/30 12:58:30 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/12/17 16:28:50 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libcub.h"
 
-//fonction qui est appelé lorsque l'utlisateur utilise une touche au clavier.
+/*
+** fonction qui est appelé lorsque l'utlisateur utilise une touche au clavier.
+*/
 
 float	ft_mod_angle2(float angle)
 {
@@ -39,8 +41,8 @@ void	ft_mod_angle(int key, t_list_map *map)
 void	ft_mod_pos(int key, t_list_map *map)
 {
 	float	tmpx;
-	float 	tmpy;
-	int 	vitesse;
+	float	tmpy;
+	int		vitesse;
 
 	tmpx = map->plr.Vposx / map->map.Tcub;
 	tmpy = map->plr.Vposy / map->map.Tcub;
@@ -59,9 +61,8 @@ void	ft_mod_pos(int key, t_list_map *map)
 
 int		close_window(t_list_map *map)
 {
-	// ne pas oubliez de free
 	mlx_destroy_window(map->data.mlx_ptr, map->data.win_ptr);
-	exit (1);
+	exit(1);
 	return (0);
 }
 
@@ -83,7 +84,7 @@ int		deal_key(int key, t_list_map *map)
 
 void	ft_event(t_list_map *map)
 {
-	mlx_hook(map->data.win_ptr, 2, 1L<<0, deal_key, map);
-	mlx_hook(map->data.win_ptr, 3, 1L<<1, deal_key1, map);
-	mlx_hook(map->data.win_ptr, 17, 1L<<17, close_window, map);
+	mlx_hook(map->data.win_ptr, 2, 1L << 0, deal_key, map);
+	mlx_hook(map->data.win_ptr, 3, 1L << 1, deal_key1, map);
+	mlx_hook(map->data.win_ptr, 17, 1L << 17, close_window, map);
 }

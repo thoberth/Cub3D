@@ -1,6 +1,4 @@
-lundi 9 novembre :
-
 -> ajouter les sprites, puis les texturer
--> getscreensize pour gerer la taille d'ecran si elle
-    est superieur a la taille de l'ecran
--> rajouter l'option --save pour screenshot le contenu
+-> ajouter free
+-> regler le pb d'inversement des textures east et west
+-> utiliser des defines pour les erreurs et les touches.

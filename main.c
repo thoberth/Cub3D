@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:07:53 by thoberth          #+#    #+#             */
-/*   Updated: 2020/11/28 15:00:58 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/11/30 13:21:05 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int main (int argc, char **argv)
 	if (argc != 2)
 	{
 		if (argc == 3 && ft_strcmp(argv[2], "--save") == 0)
-			map.map.save = 1;
+			map.verif.save = 1;
 		else
 		{
 			ft_putstr("Invalid number of argument.");
-			map.map.save = 0;
+			map.verif.save = 0;
 			ft_return_error();
 		}
 	}
