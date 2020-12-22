@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 17:59:58 by thoberth          #+#    #+#             */
-/*   Updated: 2020/12/17 16:42:47 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/12/17 17:16:29 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ float	ft_dist_wall3(t_list_map *map, float nx, float ny)
 {
 	float	result;
 
-	result = sqrt(pow(map->plr.Vposx - nx, 2) + pow(map->plr.Vposy - ny, 2));
+	result = sqrt(pow(map->plr.vposx - nx, 2) + pow(map->plr.vposy - ny, 2));
 	return (result);
 }
 
@@ -25,15 +25,15 @@ float	ft_dist_wallh(t_list_map *map, int i)
 	float	ax;
 	float	ay;
 
-	ay = (int)(map->plr.Vposy / map->map.Tcub) * map->map.Tcub;
+	ay = (int)(map->plr.vposy / map->map.tcub) * map->map.tcub;
 	if (map->ray.actual_ang < 360 && map->ray.actual_ang > 180)
-		ay += map->map.Tcub;
-	ax = map->plr.Vposx + (map->plr.Vposy - ay) /
+		ay += map->map.tcub;
+	ax = map->plr.vposx + (map->plr.vposy - ay) /
 		tan(map->ray.actual_ang * (M_PI / 180));
 	if (ax < 0)
 		ax = 0;
-	if (ax > (map->map.Tcub * map->map.t_map_x) - 1)
-		ax = (map->map.Tcub * map->map.t_map_x) - 1;
+	if (ax > (map->map.tcub * map->map.t_map_x) - 1)
+		ax = (map->map.tcub * map->map.t_map_x) - 1;
 	if (ft_iswall(map, ax, ay, 0) == 1 || ft_iswall(map, ax, ay, 0) == 3)
 	{
 		map->tex.wall_tex[i][1] = ax;
@@ -54,15 +54,15 @@ float	ft_dist_wallv(t_list_map *map, int i)
 	float	ax;
 	float	ay;
 
-	ax = (int)(map->plr.Vposx / map->map.Tcub) * map->map.Tcub;
+	ax = (int)(map->plr.vposx / map->map.tcub) * map->map.tcub;
 	if (!(map->ray.actual_ang >= 90 && map->ray.actual_ang <= 270))
-		ax += map->map.Tcub;
-	ay = map->plr.Vposy + (map->plr.Vposx - ax) *
+		ax += map->map.tcub;
+	ay = map->plr.vposy + (map->plr.vposx - ax) *
 		tan(map->ray.actual_ang * (M_PI / 180));
 	if (ay < 0)
 		ay = 0;
-	if (ay > ((map->map.Tcub * map->map.t_map_y) - 1))
-		ay = (map->map.Tcub * map->map.t_map_y) - 1;
+	if (ay > ((map->map.tcub * map->map.t_map_y) - 1))
+		ay = (map->map.tcub * map->map.t_map_y) - 1;
 	if (ft_iswall(map, ax, ay, 1) == 1 || ft_iswall(map, ax, ay, 0) == 3)
 	{
 		map->tex.wall_tex[i][2] = ay;

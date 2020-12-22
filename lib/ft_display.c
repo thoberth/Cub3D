@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 12:24:51 by thoberth          #+#    #+#             */
-/*   Updated: 2020/12/17 16:38:55 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/12/17 17:17:16 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	ft_display(t_list_map *map)
 		tmp = i + 4;
 		if (map->ray.dist[a] < 1)
 			map->ray.dist[a] = 1;
-		map->dis.t_wall = (map->map.Tcub / map->ray.dist[a]) *
+		map->dis.t_wall = (map->map.tcub / map->ray.dist[a]) *
 			map->ray.dist_to_pp;
 		map->dis.t_fc = (map->map.reso[1] - map->dis.t_wall) / 2;
 		map->dis.t_fc = map->dis.t_fc < 0 ? 0 : map->dis.t_fc;

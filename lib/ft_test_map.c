@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 13:35:12 by berthetthom       #+#    #+#             */
-/*   Updated: 2020/12/17 16:12:19 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/12/17 17:10:26 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@ int		ft_charmap_isgood(char c)
 
 void	ft_info_player(t_list_map *map, int i, int t)
 {
-	map->plr.PosplrX = t;
-	map->plr.PosplrY = i;
+	map->plr.posplrx = t;
+	map->plr.posplry = i;
 	if (map->map.map[i][t] == 'N')
-		map->plr.Angle_plr = 90;
+		map->plr.angle_plr = 90;
 	if (map->map.map[i][t] == 'S')
-		map->plr.Angle_plr = 270;
+		map->plr.angle_plr = 270;
 	if (map->map.map[i][t] == 'E')
-		map->plr.Angle_plr = 0;
+		map->plr.angle_plr = 0;
 	if (map->map.map[i][t] == 'W')
-		map->plr.Angle_plr = 180;
+		map->plr.angle_plr = 180;
 }
 
 int		ft_test_if_nsew(t_list_map *map)

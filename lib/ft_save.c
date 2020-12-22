@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 13:59:20 by thoberth          #+#    #+#             */
-/*   Updated: 2020/12/17 16:16:56 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/12/21 17:11:32 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ void	ft_save(t_list_map *map)
 	int		fd;
 	t_bmp	bmp;
 
-	fd = ft_open(fd);
+	fd = 0;
+	fd = ft_open(map, fd);
 	init_bmpfile(&bmp, map);
 	init_bmpinfo(&bmp, map);
 	write(fd, &(bmp.bmp_fh.bf_type), 14);
@@ -53,5 +54,5 @@ void	ft_save(t_list_map *map)
 	t = (map->map.reso[0] * 4);
 	while (--i >= 0)
 		write(fd, &map->data.data_addr[i * map->map.size_line], t);
-	ft_close(fd);
+	ft_close(map, fd);
 }

@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:07:32 by thoberth          #+#    #+#             */
-/*   Updated: 2020/12/17 16:31:53 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/12/18 15:18:01 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	ft_init_map2(t_list_map *map)
 	map->verif.verif_f = 0;
 	map->verif.verif_c = 0;
 	map->verif.last_verif = 0;
+	map->verif.save = 0;
 	map->map.t_map_y = 0;
 	map->map.t_map_x = 0;
 	map->map.no = NULL;
@@ -29,10 +30,14 @@ void	ft_init_map2(t_list_map *map)
 	map->data.mlx_ptr = 0;
 	map->data.win_ptr = 0;
 	map->data.img_ptr = 0;
-	map->data.data_addr = "";
-	map->data.data_addr_minimap = "";
 	map->data.img_ptr_minimap = 0;
+	map->data.data_addr = NULL;
+	map->data.data_addr_minimap = NULL;
 	map->map.map = malloc(sizeof(char **));
+	map->map.map = NULL;
+	map->ray.dist = NULL;
+	map->ray.is_sprite = NULL;
+	map->tex.wall_tex = NULL;
 }
 
 int		ft_detect_map(t_list_map *map, char *line)
@@ -117,7 +122,7 @@ int		ft_detect_map(t_list_map *map, char *line)
 	return (0);
 }
 
-int		ft_init_map(t_list_map *map, char *cub)
+void	ft_init_map(t_list_map *map, char *cub)
 {
 	int		fd;
 	char	*line;
@@ -126,7 +131,7 @@ int		ft_init_map(t_list_map *map, char *cub)
 	ft_init_map2(map);
 	fd = open(cub, O_RDONLY);
 	if (fd == -1)
-		return (ft_return_error());
+		ft_return_error(map, ERROR_FILE_MANIP);
 	while ((taille_lu = get_next_line(fd, &line)) > 0)
 	{
 		if (map->verif.last_verif < 8)
@@ -142,8 +147,8 @@ int		ft_init_map(t_list_map *map, char *cub)
 			line, map->map.t_map_y++);
 	free(line);
 	map->map.map = ft_resize_map(map, map->map.t_map_y);
-	if (map->verif.last_verif != 8 || close(fd) == -1 ||
-		ft_test_info_map(map) == -1 || ft_test_map(map) < 0)
-		return (ft_return_error());
-	return (0);
+	ft_close(map, fd);
+	if (map->verif.last_verif != 8 || ft_test_info_map(map) == -1
+		|| ft_test_map(map) < 0)
+		ft_return_error(map, WRONG_FILECUB);
 }

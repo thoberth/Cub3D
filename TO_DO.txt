@@ -1,4 +1,1 @@
 -> ajouter les sprites, puis les texturer
--> ajouter free
--> regler le pb d'inversement des textures east et west
--> utiliser des defines pour les erreurs et les touches.

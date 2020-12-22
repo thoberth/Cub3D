@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:43:46 by thoberth          #+#    #+#             */
-/*   Updated: 2020/12/17 16:22:37 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/12/18 11:52:10 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,22 @@ void	ft_init_var(t_list_map *map)
 	int		i;
 
 	i = 0;
-	map->map.Tcub = 64;
-	map->plr.Vposx = (map->plr.PosplrX * map->map.Tcub) + (map->map.Tcub / 2);
-	map->plr.Vposy = (map->plr.PosplrY * map->map.Tcub) + (map->map.Tcub / 2);
+	map->map.tcub = 64;
+	map->plr.vposx = (map->plr.posplrx * map->map.tcub) + (map->map.tcub / 2);
+	map->plr.vposy = (map->plr.posplry * map->map.tcub) + (map->map.tcub / 2);
 	map->ray.fov = 60;
 	if (!(map->ray.dist = malloc(sizeof(float) * (map->map.reso[0]))))
-		ft_return_error();
+		ft_return_error(map, ERROR_MALLOC);
 	if (!(map->ray.is_sprite = malloc(sizeof(int *) * (map->map.reso[0]))))
-		ft_return_error();
+		ft_return_error(map, ERROR_MALLOC);
 	if (!(map->tex.wall_tex = malloc(sizeof(int *) * (map->map.reso[0]))))
-		ft_return_error();
+		ft_return_error(map, ERROR_MALLOC);
 	while (i < map->map.reso[0])
 	{
 		if (!(map->tex.wall_tex[i] = malloc(sizeof(float) * (3))))
-			ft_return_error();
+			ft_return_error(map, ERROR_MALLOC);
 		if (!(map->ray.is_sprite[i] = malloc(sizeof(float) * (4))))
-			ft_return_error();
+			ft_return_error(map, ERROR_MALLOC);
 		map->ray.is_sprite[i][0] = 0;
 		i++;
 	}
@@ -43,8 +43,8 @@ void	ft_init_var(t_list_map *map)
 
 int		ft_iswall(t_list_map *map, int t, int i, int v)
 {
-	t /= map->map.Tcub;
-	i /= map->map.Tcub;
+	t /= map->map.tcub;
+	i /= map->map.tcub;
 	if (map->ray.actual_ang >= 90 && map->ray.actual_ang <= 270 && v == 1)
 		t -= 1;
 	if (map->ray.actual_ang >= 0 && map->ray.actual_ang <= 180 && !v)
@@ -71,7 +71,7 @@ void	ft_find_dist(t_list_map *map)
 
 	i = 0;
 	map->ray.actual_ang =
-		ft_mod_angle2(map->plr.Angle_plr + (map->ray.fov / 2));
+		ft_mod_angle2(map->plr.angle_plr + (map->ray.fov / 2));
 	ang = map->ray.fov / 2;
 	while (i < map->map.reso[0])
 	{

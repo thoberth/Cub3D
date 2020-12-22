@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 16:03:54 by thoberth          #+#    #+#             */
-/*   Updated: 2020/12/17 16:15:19 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/12/17 17:10:48 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	ft_display_sprite(t_list_map *map, int i)
 	float dist;
 
 	dist = ft_dist_wall3(map,
-		((map->ray.is_sprite[i][1] * map->map.Tcub) + map->map.Tcub / 2),
-		(map->ray.is_sprite[i][2] * map->map.Tcub) + map->map.Tcub / 2) *
+		((map->ray.is_sprite[i][1] * map->map.tcub) + map->map.tcub / 2),
+		(map->ray.is_sprite[i][2] * map->map.tcub) + map->map.tcub / 2) *
 		cos((map->ray.fov / 2) * (M_PI / 180));
-	dist = (map->map.Tcub / dist) * map->ray.dist_to_pp;
+	dist = (map->map.tcub / dist) * map->ray.dist_to_pp;
 }
 
 void	ft_sprite(t_list_map *map)
