@@ -6,7 +6,7 @@
 #    By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/21 15:20:17 by thoberth          #+#    #+#              #
-#    Updated: 2020/12/22 16:37:46 by thoberth         ###   ########.fr        #
+#    Updated: 2020/12/22 17:12:30 by thoberth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,14 +35,15 @@ ARRC	=	ar rcs ${NAME}
 
 EXEC	=	Cub3d
 
+${EXEC} : ${NAME} ${NAMEMLX}
+	${CC} -o $@ $^ ${MLXFLAG}
+
 ${NAME} : ${OBJS}
 	${ARRC} ${OBJS}
 
 ${NAMEMLX} :
 	cd ${MLXPATH} ; make ; cp ${NAMEMLX} ../ ; cd ..
 
-${EXEC} : ${NAME} ${NAMEMLX}
-	${CC} -o $@ $^ ${MLXFLAG}
 
 all: ${EXEC}
 
