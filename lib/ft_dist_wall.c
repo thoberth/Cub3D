@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 17:59:58 by thoberth          #+#    #+#             */
-/*   Updated: 2020/12/17 17:16:29 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/12/28 12:25:48 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,7 @@ float	ft_dist_wallh(t_list_map *map, int i)
 		return (ft_dist_wall3(map, ax, ay));
 	}
 	if (ft_iswall(map, ax, ay, 0) == 2)
-	{
-		map->ray.is_sprite[i][0] = 1;
-		map->ray.is_sprite[i][1] = map->ray.tmp_sprite[0];
-		map->ray.is_sprite[i][2] = map->ray.tmp_sprite[1];
-	}
+		ft_sprite(map, i);
 	ft_calcul_deltah(map);
 	return (ft_dist_wall2h(map, ax, ay, i));
 }
@@ -69,11 +65,7 @@ float	ft_dist_wallv(t_list_map *map, int i)
 		return (ft_dist_wall3(map, ax, ay));
 	}
 	if (ft_iswall(map, ax, ay, 1) == 2)
-	{
-		map->ray.is_sprite[i][0] = 1;
-		map->ray.is_sprite[i][1] = map->ray.tmp_sprite[0];
-		map->ray.is_sprite[i][2] = map->ray.tmp_sprite[1];
-	}
+		ft_sprite(map, i);
 	ft_calcul_deltav(map);
 	return (ft_dist_wall2v(map, ax, ay, i));
 }

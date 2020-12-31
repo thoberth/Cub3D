@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 12:01:27 by thoberth          #+#    #+#             */
-/*   Updated: 2020/12/21 17:10:53 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/12/31 15:50:21 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,6 @@
 /*
 ** fonction qui est appelé lorsque l'utlisateur utilise une touche au clavier.
 */
-
-float	ft_mod_angle2(float angle)
-{
-	if (angle > 360)
-		angle -= 360;
-	if (angle < 0)
-		angle += 360;
-	return (angle);
-}
 
 void	ft_mod_angle(int key, t_list_map *map)
 {

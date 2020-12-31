@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:43:46 by thoberth          #+#    #+#             */
-/*   Updated: 2020/12/18 11:52:10 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/12/31 15:31:21 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,16 @@ void	ft_init_var(t_list_map *map)
 	map->ray.fov = 60;
 	if (!(map->ray.dist = malloc(sizeof(float) * (map->map.reso[0]))))
 		ft_return_error(map, ERROR_MALLOC);
-	if (!(map->ray.is_sprite = malloc(sizeof(int *) * (map->map.reso[0]))))
+	if (!(map->ray.is_sprite = malloc(sizeof(float *) * (map->map.reso[0]))))
 		ft_return_error(map, ERROR_MALLOC);
-	if (!(map->tex.wall_tex = malloc(sizeof(int *) * (map->map.reso[0]))))
+	if (!(map->tex.wall_tex = malloc(sizeof(float *) * (map->map.reso[0]))))
 		ft_return_error(map, ERROR_MALLOC);
 	while (i < map->map.reso[0])
 	{
 		if (!(map->tex.wall_tex[i] = malloc(sizeof(float) * (3))))
 			ft_return_error(map, ERROR_MALLOC);
-		if (!(map->ray.is_sprite[i] = malloc(sizeof(float) * (4))))
+		if (!(map->ray.is_sprite[i] = malloc(sizeof(float) * (6))))
 			ft_return_error(map, ERROR_MALLOC);
-		map->ray.is_sprite[i][0] = 0;
 		i++;
 	}
 	map->ray.dist_to_pp = (map->map.reso[1] / 2) /
@@ -73,9 +72,17 @@ void	ft_find_dist(t_list_map *map)
 	map->ray.actual_ang =
 		ft_mod_angle2(map->plr.angle_plr + (map->ray.fov / 2));
 	ang = map->ray.fov / 2;
+	map->ray.nbr_sprite = 0;
 	while (i < map->map.reso[0])
 	{
+		map->ray.is_sprite[i][0] = 0;
 		map->ray.dist[i] = ft_dist_wall(map, i) * cos(ang * (M_PI / 180));
+		if (map->ray.is_sprite[i][0] == 1)
+		{
+			map->ray.nbr_sprite++;
+			map->ray.is_sprite[i][5] = map->ray.dist_to_pp *
+				(map->map.tcub / map->ray.is_sprite[i][3]);
+		}
 		i++;
 		map->ray.actual_ang =
 			ft_mod_angle2(map->ray.actual_ang - map->ray.ang_next_ray);
@@ -87,7 +94,11 @@ void	ft_raycasting(t_list_map *map)
 {
 	ft_find_dist(map);
 	ft_display(map);
-	ft_sprite(map);
+	if (map->ray.nbr_sprite > 0)
+	{
+		ft_sort_sprite(map);
+		ft_display_sprite(map);
+	}
 	mlx_put_image_to_window(map->data.mlx_ptr, map->data.win_ptr,
 		map->data.img_ptr, 0, 0);
 }

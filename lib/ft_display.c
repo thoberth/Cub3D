@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 12:24:51 by thoberth          #+#    #+#             */
-/*   Updated: 2020/12/17 17:17:16 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/12/31 16:19:15 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,10 @@ int		ft_display_walltex(t_list_map *map, int i, int *tab, char *str)
 		{
 			j = t / map->dis.t_wall;
 			r = tab[1] * j;
-			r *= (tab[0] * 4);
+			r = (r * (tab[0] * 4)) + map->tex.line;
 		}
 		else
-			r = 0;
-		r += map->tex.line;
+			r = map->tex.line;
 		map->data.data_addr[i++] = str[r++];
 		map->data.data_addr[i++] = str[r++];
 		map->data.data_addr[i++] = str[r++];

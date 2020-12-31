@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 13:58:47 by thoberth          #+#    #+#             */
-/*   Updated: 2020/12/17 17:09:45 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/12/27 18:13:10 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_calc_line(t_list_map *map, int a, int *tab)
 	map->tex.line = a;
 	while (map->tex.line >= map->map.tcub)
 		map->tex.line -= map->map.tcub;
-	map->tex.line /= map->map.tcub;
+	map->tex.line /= tab[0];
 	map->tex.line *= tab[0];
 	map->tex.line *= 4;
 }
