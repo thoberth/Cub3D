@@ -99,6 +99,11 @@ void	ft_raycasting(t_list_map *map)
 		ft_sort_sprite(map);
 		ft_display_sprite(map);
 	}
+	if (map->verif.save == 1)
+	{
+		ft_save(map);
+		ft_return_error(map, SAVE);
+	}
 	mlx_put_image_to_window(map->data.mlx_ptr, map->data.win_ptr,
 		map->data.img_ptr, 0, 0);
 }

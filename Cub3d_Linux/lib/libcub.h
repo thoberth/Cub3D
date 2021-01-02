@@ -17,6 +17,7 @@
 # define ERROR_FILE_MANIP 1
 # define WRONG_FILECUB 2
 # define WRONG_NUMBER_ARGUMENTS 3
+# define SAVE 5
 # define KEY_ESC 65307
 # define KEY_TURN_LEFT 65361
 # define KEY_TURN_RIGHT 65363
@@ -24,6 +25,7 @@
 # define KEY_GO_BACK 115
 # define KEY_GO_LEFT 97
 # define KEY_GO_RIGHT 100
+# define M_PI 3.141592
 # include <stdio.h>
 # include <sys/types.h>
 # include <sys/stat.h>
@@ -182,7 +184,7 @@ void			ft_verif_reso(t_list_map *map);
 */
 void			ft_player(t_list_map *map);
 void			ft_raycasting(t_list_map *map);
-void			ft_start_all(t_list_map *map);
+void			ft_start_all(t_list_map *map, char *str);
 float			ft_dist_wall(t_list_map *map, int i);
 float			ft_mod_angle2(float angle);
 int				ft_iswall(t_list_map *map, int t, int i, int v);

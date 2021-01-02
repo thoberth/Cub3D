@@ -45,5 +45,5 @@ int		ft_circled_of_1_vertical(char **map, int t_map)
 			return (-1);
 		t++;
 	}
-	return (ft_map_is_split(map, t_map));
+	return (0);
 }

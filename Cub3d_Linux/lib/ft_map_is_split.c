@@ -61,5 +61,6 @@ int		ft_map_is_split(char **map, int t_map)
 		while (map[i][t] == ' ')
 			t++;
 	}
+	ft_putnbr(compt);
 	return ((compt < 0) ? -1 : 0);
 }

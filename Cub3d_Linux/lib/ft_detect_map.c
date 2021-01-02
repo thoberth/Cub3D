@@ -89,14 +89,23 @@ void	ft_detect_map(t_list_map *map, char *line)
 		i++;
 	if (line[i] == 'R')
 	{
+		i++;
 		map->verif.last_verif++;
 		map->verif.verif_reso++;
-		i++;
-		map->map.reso[0] = ft_atoi(&line[++i]);
+		while (line[i] == ' ')
+			i++;
+		map->map.reso[0] = ft_atoi(&line[i]);
 		while (line[i] >= '0' && line[i] <= '9')
 			i++;
+		while (line[i] == ' ')
+			i++;
 		map->map.reso[1] = ft_atoi(&line[i]);
-		//ft_verif_reso(map);
+		while (line[i] >= '0' && line[i] <= '9')
+			i++;
+		
+		if (line[i] != '\0')
+			ft_return_error(map, WRONG_FILECUB);
+		ft_verif_reso(map);
 	}
 	if (line[i] == 'S' && line[i + 1] == 'O')
 	{

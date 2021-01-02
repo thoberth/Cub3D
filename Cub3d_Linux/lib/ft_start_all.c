@@ -12,7 +12,7 @@
 
 #include "libcub.h"
 
-void	ft_start_all(t_list_map *map)
+void	ft_start_all(t_list_map *map, char *str)
 {
 	int		bpp;
 	int		endian;
@@ -21,6 +21,7 @@ void	ft_start_all(t_list_map *map)
 	map->map.size_line = 0;
 	endian = 0;
 	map->data.mlx_ptr = mlx_init();
+	ft_init_map(map, str);
 	map->data.win_ptr = mlx_new_window(map->data.mlx_ptr, map->map.reso[0],
 		map->map.reso[1], "Cub3D");
 	map->data.img_ptr = mlx_new_image(map->data.mlx_ptr, map->map.reso[0],
@@ -31,7 +32,5 @@ void	ft_start_all(t_list_map *map)
 	ft_init_var(map);
 	ft_raycasting(map);
 	ft_event(map);
-	if (map->verif.save == 1)
-		ft_save(map);
 	mlx_loop(map->data.mlx_ptr);
 }

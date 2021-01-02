@@ -33,20 +33,24 @@ void	ft_mod_pos(int key, t_list_map *map)
 {
 	float	tmpx;
 	float	tmpy;
+	int		max_x;
+	int		max_y;
 	int		vitesse;
 
-	tmpx = map->plr.vposx / map->map.tcub;
-	tmpy = map->plr.vposy / map->map.tcub;
+	tmpx = map->plr.vposx;
+	tmpy = map->plr.vposy;
+	max_x = map->map.t_map_x * map->map.tcub;
+	max_y = map->map.t_map_y * map->map.tcub;
 	vitesse = map->map.tcub / 16;
 	ft_mod_pos2(key, map, vitesse);
-	if (tmpx < map->plr.vposx / map->map.tcub)
-		map->plr.posplrx++;
-	if (tmpx > map->plr.vposx / map->map.tcub)
-		map->plr.posplrx--;
-	if (tmpy < map->plr.vposy / map->map.tcub)
-		map->plr.posplry++;
-	if (tmpy > map->plr.vposy / map->map.tcub)
-		map->plr.posplry--;
+	if (map->plr.vposx <= 0)
+		map->plr.vposx = tmpx;
+	if (map->plr.vposx >= max_x)
+		map->plr.vposx = tmpx;
+	if (map->plr.vposy <= 0)
+		map->plr.vposy = tmpy;
+	if (map->plr.vposy >= max_y)
+		map->plr.vposx = tmpy;
 	ft_raycasting(map);
 }
 
