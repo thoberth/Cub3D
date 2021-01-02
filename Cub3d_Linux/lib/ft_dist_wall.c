@@ -81,6 +81,11 @@ float	ft_dist_wall(t_list_map *map, int i)
 
 	a = ft_dist_wallv(map, i);
 	b = ft_dist_wallh(map, i);
+	if (i == 639)
+	{
+		ft_putnbr(a);
+		ft_putnbr(b);
+	}
 	if (a < b)
 	{
 		if (map->ray.actual_ang > 90 && map->ray.actual_ang < 270)

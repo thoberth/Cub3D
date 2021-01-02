@@ -104,6 +104,12 @@ void	ft_raycasting(t_list_map *map)
 		ft_save(map);
 		ft_return_error(map, SAVE);
 	}
+	/*int	i = 635;
+	while (i < 645)
+	{
+		ft_putnbr(map->tex.wall_tex[i++][0]);
+	}*/
+	ft_putchar('\n');
 	mlx_put_image_to_window(map->data.mlx_ptr, map->data.win_ptr,
 		map->data.img_ptr, 0, 0);
 }

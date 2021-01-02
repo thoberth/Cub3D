@@ -211,6 +211,8 @@ void			ft_save(t_list_map *map);
 int				ft_open(t_list_map *map, int fd);
 void			ft_close(t_list_map *map, int fd);
 void			ft_event(t_list_map *map);
+int				deal_key(int key, t_list_map *map);
+int				close_window(t_list_map *map);
 void			ft_mod_pos2(int key, t_list_map *map, int vitesse);
 int				ft_detect_wall(t_list_map *map, int x, int y);
 

@@ -60,13 +60,13 @@ void	ft_free(t_list_map *map)
 void	ft_return_error(t_list_map *map, int define)
 {
 	if (define == ERROR_MALLOC)
-		ft_putstr("Error malloc.\n");
+		ft_putstr("Error, malloc.\n");
 	else if (define == ERROR_FILE_MANIP)
-		ft_putstr("Error during opening or closing file.\n");
+		ft_putstr("Error, during opening or closing file.\n");
 	else if (define == WRONG_FILECUB)
-		ft_putstr("Error, invalid file .cub .\n");
+		ft_putstr("Error, info .cub.\n");
 	else if (define == WRONG_NUMBER_ARGUMENTS)
-		ft_putstr("Error, invalid number of arguments.\n");
+		ft_putstr("Error, invalid arguments.\n");
 	if (!(define == WRONG_NUMBER_ARGUMENTS))
 		ft_free(map);
 	if (define == EXIT_SUCCESS)

@@ -15,8 +15,12 @@
 int	main(int argc, char **argv)
 {
 	t_list_map	map;
+	int			i;
 
 	map.verif.save = 0;
+	i = ft_strlen(argv[1]) - 4;
+	if (ft_strcmp(&argv[1][i], ".cub"))
+		ft_return_error(&map, WRONG_NUMBER_ARGUMENTS);
 	if (argc != 2)
 	{
 		if (argc == 3 && ft_strcmp(argv[2], "--save") == 0)
