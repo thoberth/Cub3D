@@ -13,15 +13,15 @@
 SRCS	=	main.c	\
 			$(wildcard lib/*.c)
 
-OBJS	=	${SRCS:.c=.o}
+OBJS	=	${SRCS:.c=.o}  
 
 CC		=	gcc
 
 CFLAGS	=	-Wall -Wextra -Werror
 
-MLXFLAG	=	-lm -lbsd -lXext -lX11
+MLXFLAG	=	-lm -lbsd -lmlx -lXext -lX11
 
-MLXPATH	=	minilibx/
+MLXPATH	=	minilibx
 
 HDR		=	lib/libcub.h
 

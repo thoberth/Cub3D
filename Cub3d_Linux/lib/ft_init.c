@@ -38,6 +38,22 @@ void	ft_init_map2(t_list_map *map)
 	map->tex.wall_tex = NULL;
 }
 
+void	ft_test_f_c(t_list_map *map)
+{
+	if (map->map.f[0] < 0 || map->map.f[0] > 255)
+		ft_return_error(map, WRONG_FILECUB);
+	if (map->map.f[1] < 0 || map->map.f[1] > 255)
+		ft_return_error(map, WRONG_FILECUB);
+	if (map->map.f[2] < 0 || map->map.f[2] > 255)
+		ft_return_error(map, WRONG_FILECUB);
+	if (map->map.c[0] < 0 || map->map.c[0] > 255)
+		ft_return_error(map, WRONG_FILECUB);
+	if (map->map.c[1] < 0 || map->map.c[1] > 255)
+		ft_return_error(map, WRONG_FILECUB);
+	if (map->map.c[2] < 0 || map->map.c[2] > 255)
+		ft_return_error(map, WRONG_FILECUB);
+}
+
 void	ft_init_map_suite(t_list_map *map, char *line, int fd)
 {
 	if (map->verif.last_verif == 8)
@@ -73,5 +89,6 @@ void	ft_init_map(t_list_map *map, char *cub)
 				line, map->map.t_map_y++);
 		free(line);
 	}
+	ft_test_f_c(map);
 	ft_init_map_suite(map, line, fd);
 }

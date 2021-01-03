@@ -31,9 +31,10 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include <limits.h>
 # include <unistd.h>
-# include "../minilibx/mlx.h"
 # include <math.h>
+# include "../minilibx/mlx.h"
 # include "get_next_line.h"
 # include "bitmap.h"
 
@@ -62,7 +63,7 @@ typedef struct	s_all
 		char	*we;
 		char	*ea;
 		char	*sprite;
-		float	reso[2];
+		int		reso[2];
 		int		reso_2d[2];
 		int		f[3];
 		int		c[3];
@@ -210,7 +211,7 @@ void			ft_return_error(t_list_map *map, int define);
 void			ft_save(t_list_map *map);
 int				ft_open(t_list_map *map, int fd);
 void			ft_close(t_list_map *map, int fd);
-void			ft_event(t_list_map *map);
+int				do_nothing(void);
 int				deal_key(int key, t_list_map *map);
 int				close_window(t_list_map *map);
 void			ft_mod_pos2(int key, t_list_map *map, int vitesse);

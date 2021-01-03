@@ -14,7 +14,7 @@
 
 void	ft_calcul_deltah(t_list_map *map)
 {
-	if (map->ray.actual_ang >= 0 && map->ray.actual_ang <= 180)
+	if (map->ray.actual_ang >= 0 && map->ray.actual_ang < 180)
 	{
 		map->ray.delta[0] = map->map.tcub / tan(map->ray.actual_ang *
 			(M_PI / 180));
@@ -51,7 +51,7 @@ float	ft_dist_wall2h(t_list_map *map, float ax, float ay, int i)
 
 void	ft_calcul_deltav(t_list_map *map)
 {
-	if (map->ray.actual_ang >= 90 && map->ray.actual_ang <= 270)
+	if (map->ray.actual_ang > 90 && map->ray.actual_ang <= 270)
 	{
 		map->ray.delta[0] = -map->map.tcub;
 		map->ray.delta[1] = map->map.tcub * tan(map->ray.actual_ang *
@@ -75,7 +75,7 @@ float	ft_dist_wall2v(t_list_map *map, float ax, float ay, int i)
 	ny = (ny < 0 ? 0 : ny);
 	if (ny > ((map->map.tcub * map->map.t_map_y) - 1))
 		ny = (map->map.tcub * map->map.t_map_y) - 1;
-	if (ft_iswall(map, nx, ny, 1) == 1 || ft_iswall(map, nx, ny, 0) == 3)
+	if (ft_iswall(map, nx, ny, 1) == 1 || ft_iswall(map, nx, ny, 1) == 3)
 	{
 		map->tex.wall_tex[i][2] = ny;
 		return (ft_dist_wall3(map, nx, ny));

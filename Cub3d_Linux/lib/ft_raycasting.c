@@ -37,7 +37,7 @@ void	ft_init_var(t_list_map *map)
 	}
 	map->ray.dist_to_pp = (map->map.reso[1] / 2) /
 		tan((map->ray.fov / 2) * (M_PI / 180));
-	map->ray.ang_next_ray = map->ray.fov / map->map.reso[0];
+	map->ray.ang_next_ray = (float)map->ray.fov / (float)map->map.reso[0];
 }
 
 int		ft_iswall(t_list_map *map, int t, int i, int v)
@@ -92,6 +92,15 @@ void	ft_find_dist(t_list_map *map)
 
 void	ft_raycasting(t_list_map *map)
 {
+	int		bpp;
+	int		endian;
+
+	if (map->data.img_ptr != NULL)
+		mlx_destroy_image(map->data.mlx_ptr, map->data.img_ptr);
+	map->data.img_ptr = mlx_new_image(map->data.mlx_ptr, map->map.reso[0],
+		map->map.reso[1]);
+	map->data.data_addr = mlx_get_data_addr(map->data.img_ptr, &bpp,
+		&map->map.size_line, &endian);
 	ft_find_dist(map);
 	ft_display(map);
 	if (map->ray.nbr_sprite > 0)
@@ -104,12 +113,6 @@ void	ft_raycasting(t_list_map *map)
 		ft_save(map);
 		ft_return_error(map, SAVE);
 	}
-	/*int	i = 635;
-	while (i < 645)
-	{
-		ft_putnbr(map->tex.wall_tex[i++][0]);
-	}*/
-	ft_putchar('\n');
 	mlx_put_image_to_window(map->data.mlx_ptr, map->data.win_ptr,
 		map->data.img_ptr, 0, 0);
 }

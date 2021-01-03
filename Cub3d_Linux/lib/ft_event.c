@@ -81,10 +81,3 @@ int		do_nothing(void)
 {
 	return (0);
 }
-
-void	ft_event(t_list_map *map)
-{
-	mlx_hook(map->data.win_ptr, 2, 1L << 0, deal_key, map);
-	mlx_hook(map->data.win_ptr, 3, 1L << 1, deal_key, map);
-	mlx_hook(map->data.win_ptr, 17, 1L << 17, close_window, map);
-}
