@@ -26,7 +26,6 @@ void	ft_mod_angle(int key, t_list_map *map)
 		map->plr.angle_plr -= 360;
 	if (map->plr.angle_plr < 0)
 		map->plr.angle_plr += 360;
-	ft_raycasting(map);
 }
 
 void	ft_mod_pos(int key, t_list_map *map)
@@ -51,7 +50,6 @@ void	ft_mod_pos(int key, t_list_map *map)
 		map->plr.vposy = tmpy;
 	if (map->plr.vposy >= max_y)
 		map->plr.vposx = tmpy;
-	ft_raycasting(map);
 }
 
 int		close_window(t_list_map *map)
@@ -74,6 +72,7 @@ int		deal_key(int key, t_list_map *map)
 	if (key == KEY_GO_AHEAD || key == KEY_GO_BACK || key == KEY_GO_LEFT ||
 		key == KEY_GO_RIGHT)
 		ft_mod_pos(key, map);
+	ft_raycasting(map);
 	return (0);
 }
 
