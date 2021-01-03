@@ -6,11 +6,38 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 16:11:33 by thoberth          #+#    #+#             */
-/*   Updated: 2020/12/31 16:12:48 by thoberth         ###   ########.fr       */
+/*   Updated: 2021/01/03 12:31:15 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libcub.h"
+
+void	ft_recup_info_f_c(t_list_map *map, char *line, int i, int dest[3])
+{
+	while (line[i] == ' ')
+		i++;
+	dest[0] = ft_atoi(&line[i]);
+	while (line[i] >= '0' && line[i] <= '9')
+		i++;
+	while (line[i] == ' ')
+		i++;
+	line[i] == ',' ? i++ : ft_return_error(map, WRONG_FILECUB);
+	while (line[i] == ' ')
+		i++;
+	dest[1] = ft_atoi(&line[i]);
+	while (line[i] >= '0' && line[i] <= '9')
+		i++;
+	while (line[i] == ' ')
+		i++;
+	dest[i] == ',' ? i++ : ft_return_error(map, WRONG_FILECUB);
+	while (line[i] == ' ')
+		i++;
+	dest[2] = ft_atoi(&line[i]);
+	while (line[i] >= '0' && line[i] <= '9')
+		i++;
+	if (line[i] != '\0')
+		ft_return_error(map, WRONG_FILECUB);
+}
 
 void	ft_detect_map4(t_list_map *map, char *line, int i)
 {
@@ -19,29 +46,15 @@ void	ft_detect_map4(t_list_map *map, char *line, int i)
 		i++;
 		map->verif.last_verif++;
 		map->verif.verif_c++;
+		ft_recup_info_f_c(map, line, i, map->map.c);
+	}
+	else if (line[i] == 'E' && line[i + 1] == 'A' && line[i + 2] == ' ')
+	{
+		i += 3;
+		map->verif.last_verif++;
 		while (line[i] == ' ')
 			i++;
-		map->map.c[0] = ft_atoi(&line[i]);
-		while (line[i] >= '0' && line[i] <= '9')
-			i++;
-		while (line[i] == ' ')
-			i++;
-		line[i] == ',' ? i++ : ft_return_error(map, WRONG_FILECUB);
-		while (line[i] == ' ')
-			i++;
-		map->map.c[1] = ft_atoi(&line[i]);
-		while (line[i] >= '0' && line[i] <= '9')
-			i++;
-		while (line[i] == ' ')
-			i++;
-		line[i] == ',' ? i++ : ft_return_error(map, WRONG_FILECUB);
-		while (line[i] == ' ')
-			i++;
-		map->map.c[2] = ft_atoi(&line[i]);
-		while (line[i] >= '0' && line[i] <= '9')
-			i++;
-		if (line[i] != '\0')
-			ft_return_error(map, WRONG_FILECUB);
+		map->map.ea = ft_strdup(&line[i]);
 	}
 }
 
@@ -55,34 +68,20 @@ void	ft_detect_map3(t_list_map *map, char *line, int i)
 			i++;
 		map->map.sprite = ft_strdup(&line[i]);
 	}
+	else if (line[i] == 'S' && line[i + 1] == 'O' && line[i + 2] == ' ')
+	{
+		i += 3;
+		map->verif.last_verif++;
+		while (line[i] == ' ')
+			i++;
+		map->map.so = ft_strdup(&line[i]);
+	}
 	else if (line[i] == 'F' && line[i + 1] == ' ')
 	{
 		i++;
 		map->verif.last_verif++;
 		map->verif.verif_f++;
-		while (line[i] == ' ')
-			i++;
-		map->map.f[0] = ft_atoi(&line[i]);
-		while (line[i] >= '0' && line[i] <= '9')
-			i++;
-		while (line[i] == ' ')
-			i++;
-		line[i] == ',' ? i++ : ft_return_error(map, WRONG_FILECUB);
-		while (line[i] == ' ')
-			i++;
-		map->map.f[1] = ft_atoi(&line[i]);
-		while (line[i] >= '0' && line[i] <= '9')
-			i++;
-		while (line[i] == ' ')
-			i++;
-		line[i] == ',' ? i++ : ft_return_error(map, WRONG_FILECUB);
-		while (line[i] == ' ')
-			i++;
-		map->map.f[2] = ft_atoi(&line[i]);
-		while (line[i] >= '0' && line[i] <= '9')
-			i++;
-		if (line[i] != '\0')
-			ft_return_error(map, WRONG_FILECUB);
+		ft_recup_info_f_c(map, line, i, map->map.f);
 	}
 	else
 		ft_detect_map4(map, line, i);
@@ -105,14 +104,6 @@ void	ft_detect_map2(t_list_map *map, char *line, int i)
 		while (line[i] == ' ')
 			i++;
 		map->map.we = ft_strdup(&line[i]);
-	}
-	else if (line[i] == 'E' && line[i + 1] == 'A' && line[i + 2] == ' ')
-	{
-		i += 3;
-		map->verif.last_verif++;
-		while (line[i] == ' ')
-			i++;
-		map->map.ea = ft_strdup(&line[i]);
 	}
 	else
 		ft_detect_map3(map, line, i);
@@ -140,17 +131,8 @@ void	ft_detect_map(t_list_map *map, char *line)
 		map->map.reso[1] = ft_atoi(&line[i]);
 		while (line[i] >= '0' && line[i] <= '9')
 			i++;
-		if (line[i] != '\0')
-			ft_return_error(map, WRONG_FILECUB);
+		line[i] != '\0' ? ft_return_error(map, WRONG_FILECUB) : 0;
 		ft_verif_reso(map);
-	}
-	else if (line[i] == 'S' && line[i + 1] == 'O' && line[i + 2] == ' ')
-	{
-		i += 3;
-		map->verif.last_verif++;
-		while (line[i] == ' ')
-			i++;
-		map->map.so = ft_strdup(&line[i]);
 	}
 	else
 		ft_detect_map2(map, line, i);

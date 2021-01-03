@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 14:59:00 by thoberth          #+#    #+#             */
-/*   Updated: 2020/12/17 16:14:31 by thoberth         ###   ########.fr       */
+/*   Updated: 2021/01/03 12:15:30 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		ft_hook_for_screen(t_list_map *map)
 void	ft_start_all(t_list_map *map, char *str)
 {
 	map->data.mlx_ptr = mlx_init();
-	ft_init_map(map, str);	
+	ft_init_map(map, str);
 	ft_recup_data_tex(map);
 	ft_init_var(map);
 	if (map->verif.save == 1)
