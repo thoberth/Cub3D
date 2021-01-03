@@ -29,7 +29,7 @@ void	ft_recup_info_f_c(t_list_map *map, char *line, int i, int dest[3])
 		i++;
 	while (line[i] == ' ')
 		i++;
-	dest[i] == ',' ? i++ : ft_return_error(map, WRONG_FILECUB);
+	line[i] == ',' ? i++ : ft_return_error(map, WRONG_FILECUB);
 	while (line[i] == ' ')
 		i++;
 	dest[2] = ft_atoi(&line[i]);

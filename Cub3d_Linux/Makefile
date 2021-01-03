@@ -19,7 +19,7 @@ CC		=	gcc
 
 CFLAGS	=	-Wall -Wextra -Werror
 
-MLXFLAG	=	-lm -lbsd -lmlx -lXext -lX11
+MLXFLAG	=	-lm -lbsd -L minilibx/ -lmlx -lXext -lX11
 
 MLXPATH	=	minilibx
 
