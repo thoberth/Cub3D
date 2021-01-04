@@ -12,6 +12,27 @@
 
 #include "libcub.h"
 
+void	ft_sort_sprite2(t_list_map *map)
+{
+	int	a;
+	int	tmp;
+
+	a = 0;
+	while ((a + 1) < map->ray.nbr_sprite)
+	{
+		if (map->ray.is_sprite[map->ray.sort[a]][3] <
+			map->ray.is_sprite[map->ray.sort[a + 1]][3])
+		{
+			tmp = map->ray.sort[a];
+			map->ray.sort[a] = map->ray.sort[a + 1];
+			map->ray.sort[a + 1] = tmp;
+			a = 0;
+		}
+		else
+			a++;
+	}
+}
+
 void	ft_sort_sprite(t_list_map *map)
 {
 	int		i;
@@ -27,20 +48,7 @@ void	ft_sort_sprite(t_list_map *map)
 			map->ray.sort[a++] = i;
 		i++;
 	}
-	a = 0;
-	while ((a + 1) < map->ray.nbr_sprite)
-	{
-		if (map->ray.is_sprite[map->ray.sort[a]][3] <
-			map->ray.is_sprite[map->ray.sort[a + 1]][3])
-		{
-			i = map->ray.sort[a];
-			map->ray.sort[a] = map->ray.sort[a + 1];
-			map->ray.sort[a + 1] = i;
-			a = 0;
-		}
-		else
-			a++;
-	}
+	ft_sort_sprite2(map);
 }
 
 void	ft_calcul_sprite_ang(t_list_map *map, int i)

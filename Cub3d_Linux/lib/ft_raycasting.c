@@ -88,6 +88,7 @@ void	ft_find_dist(t_list_map *map)
 			ft_mod_angle2(map->ray.actual_ang - map->ray.ang_next_ray);
 		ang -= map->ray.ang_next_ray;
 	}
+	ft_display(map);
 }
 
 void	ft_raycasting(t_list_map *map)
@@ -95,7 +96,8 @@ void	ft_raycasting(t_list_map *map)
 	int		bpp;
 	int		endian;
 
-	mlx_clear_window(map->data.mlx_ptr, map->data.win_ptr);
+	if (map->verif.save == 0)
+		mlx_clear_window(map->data.mlx_ptr, map->data.win_ptr);
 	if (map->data.img_ptr == NULL)
 	{
 		map->data.img_ptr = mlx_new_image(map->data.mlx_ptr, map->map.reso[0],
@@ -104,7 +106,6 @@ void	ft_raycasting(t_list_map *map)
 			&map->map.size_line, &endian);
 	}
 	ft_find_dist(map);
-	ft_display(map);
 	if (map->ray.nbr_sprite > 0)
 	{
 		ft_sort_sprite(map);

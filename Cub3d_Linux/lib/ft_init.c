@@ -26,9 +26,9 @@ void	ft_init_map2(t_list_map *map)
 	map->map.we = NULL;
 	map->map.sprite = NULL;
 	map->data.is_2d = 0;
-	map->data.win_ptr = 0;
-	map->data.img_ptr = 0;
-	map->data.img_ptr_minimap = 0;
+	map->data.win_ptr = NULL;
+	map->data.img_ptr = NULL;
+	map->data.img_ptr_minimap = NULL;
 	map->data.data_addr = NULL;
 	map->data.data_addr_minimap = NULL;
 	map->map.map = malloc(sizeof(char **));

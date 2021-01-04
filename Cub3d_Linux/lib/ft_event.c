@@ -54,11 +54,11 @@ void	ft_mod_pos(int key, t_list_map *map)
 
 int		close_window(t_list_map *map)
 {
-	mlx_destroy_window(map->data.mlx_ptr, map->data.win_ptr);
 	if (map->data.img_ptr != NULL)
 		mlx_destroy_image(map->data.mlx_ptr, map->data.img_ptr);
-	if (map->data.img_ptr_minimap != NULL)
-		mlx_destroy_image(map->data.mlx_ptr, map->data.img_ptr_minimap);
+	mlx_destroy_window(map->data.mlx_ptr, map->data.win_ptr);
+	mlx_destroy_display(map->data.mlx_ptr);
+	free(map->data.mlx_ptr);
 	ft_return_error(map, EXIT_SUCCESS);
 	return (0);
 }
