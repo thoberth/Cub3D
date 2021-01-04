@@ -97,7 +97,7 @@ void	ft_display(t_list_map *map)
 			map->ray.dist[a] = 1;
 		map->dis.t_wall = (map->map.tcub / map->ray.dist[a]) *
 			map->ray.dist_to_pp;
-		map->dis.t_fc = (map->map.reso[1] - map->dis.t_wall) / 2;
+		map->dis.t_fc = ((float)map->map.reso[1] - map->dis.t_wall) / 2;
 		map->dis.t_fc = map->dis.t_fc < 0 ? 0 : map->dis.t_fc;
 		if (map->dis.t_wall + (map->dis.t_fc * 2) < map->map.reso[1])
 			map->dis.t_wall++;

@@ -34,6 +34,7 @@ char	*ft_resize_line(char *line, int new_t)
 			i++;
 		}
 	}
+	free(line);
 	return (res);
 }
 
@@ -61,5 +62,6 @@ char	**ft_resize_map(t_list_map *map, int t_map)
 		res[i] = ft_resize_line(map->map.map[i], t);
 		i++;
 	}
+	free(map->map.map);
 	return (res);
 }

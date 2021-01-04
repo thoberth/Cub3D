@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:08:08 by thoberth          #+#    #+#             */
-/*   Updated: 2020/12/31 16:37:58 by thoberth         ###   ########.fr       */
+/*   Updated: 2021/01/04 17:21:08 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define ERROR_FILE_MANIP 1
 # define WRONG_FILECUB 2
 # define WRONG_NUMBER_ARGUMENTS 3
+# define SAVE 5
 # define KEY_ESC 53
 # define KEY_TURN_LEFT 123
 # define KEY_TURN_RIGHT 124
@@ -29,9 +30,10 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include <limits.h>
 # include <unistd.h>
-# include "../minilibx/mlx.h"
 # include <math.h>
+# include "../minilibx/mlx.h"
 # include "get_next_line.h"
 # include "bitmap.h"
 
@@ -60,7 +62,7 @@ typedef struct	s_all
 		char	*we;
 		char	*ea;
 		char	*sprite;
-		float	reso[2];
+		int		reso[2];
 		int		reso_2d[2];
 		int		f[3];
 		int		c[3];
@@ -182,7 +184,7 @@ void			ft_verif_reso(t_list_map *map);
 */
 void			ft_player(t_list_map *map);
 void			ft_raycasting(t_list_map *map);
-void			ft_start_all(t_list_map *map);
+void			ft_start_all(t_list_map *map, char *str);
 float			ft_dist_wall(t_list_map *map, int i);
 float			ft_mod_angle2(float angle);
 int				ft_iswall(t_list_map *map, int t, int i, int v);
@@ -208,7 +210,9 @@ void			ft_return_error(t_list_map *map, int define);
 void			ft_save(t_list_map *map);
 int				ft_open(t_list_map *map, int fd);
 void			ft_close(t_list_map *map, int fd);
-void			ft_event(t_list_map *map);
+int				do_nothing(void);
+int				deal_key(int key, t_list_map *map);
+int				close_window(t_list_map *map);
 void			ft_mod_pos2(int key, t_list_map *map, int vitesse);
 int				ft_detect_wall(t_list_map *map, int x, int y);
 

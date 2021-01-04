@@ -20,11 +20,11 @@ char	*ft_strdup(char *s1)
 
 	i = 0;
 	t = ft_strlen(s1);
+	dup = NULL;
 	if (!(dup = malloc(sizeof(char) * (t + 1))))
 		return (NULL);
 	dup[t] = '\0';
-	t -= 1;
-	while (i <= t)
+	while (i < t)
 	{
 		dup[i] = s1[i];
 		i++;

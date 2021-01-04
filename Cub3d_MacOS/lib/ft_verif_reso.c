@@ -17,8 +17,11 @@ void	ft_verif_reso(t_list_map *map)
 	int	a;
 	int	b;
 
+	a = 0;
+	b = 0;
+	if (map->map.reso[0] < 1 || map->map.reso[1] < 1)
+		ft_return_error(map, WRONG_FILECUB);
 	mlx_get_screen_size(map->data.mlx_ptr, &a, &b);
-	b -= 50;
 	map->map.reso[0] = (map->map.reso[0] > a ? a : map->map.reso[0]);
 	map->map.reso[1] = (map->map.reso[1] > b ? b : map->map.reso[1]);
 }

@@ -62,9 +62,9 @@ int		get_next_line(int fd, char **line)
 {
 	int				taille_lu;
 	char			buf[BUFFER_SIZE + 1];
-	static char		*tmp[OPEN_MAX];
+	static char		*tmp[FOPEN_MAX];
 
-	if (fd < 0 || fd > OPEN_MAX || !line || BUFFER_SIZE <= 0
+	if (fd < 0 || fd > FOPEN_MAX || !line || BUFFER_SIZE <= 0
 		|| read(fd, buf, 0) < 0)
 		return (-1);
 	if (ft_2test(line, tmp, fd) == 1)

@@ -26,8 +26,10 @@ char	**ft_line_to_array_of_str(char **map, char *line, int c)
 	while (j < i)
 	{
 		res[j] = ft_strdup(map[j]);
+		free(map[j]);
 		j++;
 	}
 	res[i] = ft_strdup(line);
+	free(map);
 	return (res);
 }

@@ -18,7 +18,6 @@ void	ft_init_map2(t_list_map *map)
 	map->verif.verif_f = 0;
 	map->verif.verif_c = 0;
 	map->verif.last_verif = 0;
-	map->verif.save = 0;
 	map->map.t_map_y = 0;
 	map->map.t_map_x = 0;
 	map->map.no = NULL;
@@ -27,18 +26,32 @@ void	ft_init_map2(t_list_map *map)
 	map->map.we = NULL;
 	map->map.sprite = NULL;
 	map->data.is_2d = 0;
-	map->data.mlx_ptr = 0;
-	map->data.win_ptr = 0;
-	map->data.img_ptr = 0;
-	map->data.img_ptr_minimap = 0;
+	map->data.win_ptr = NULL;
+	map->data.img_ptr = NULL;
+	map->data.img_ptr_minimap = NULL;
 	map->data.data_addr = NULL;
 	map->data.data_addr_minimap = NULL;
 	map->map.map = malloc(sizeof(char **));
-	map->map.map = NULL;
 	map->ray.dist = NULL;
 	map->ray.is_sprite = NULL;
 	map->ray.sort = NULL;
 	map->tex.wall_tex = NULL;
+}
+
+void	ft_test_f_c(t_list_map *map)
+{
+	if (map->map.f[0] < 0 || map->map.f[0] > 255)
+		ft_return_error(map, WRONG_FILECUB);
+	if (map->map.f[1] < 0 || map->map.f[1] > 255)
+		ft_return_error(map, WRONG_FILECUB);
+	if (map->map.f[2] < 0 || map->map.f[2] > 255)
+		ft_return_error(map, WRONG_FILECUB);
+	if (map->map.c[0] < 0 || map->map.c[0] > 255)
+		ft_return_error(map, WRONG_FILECUB);
+	if (map->map.c[1] < 0 || map->map.c[1] > 255)
+		ft_return_error(map, WRONG_FILECUB);
+	if (map->map.c[2] < 0 || map->map.c[2] > 255)
+		ft_return_error(map, WRONG_FILECUB);
 }
 
 void	ft_init_map_suite(t_list_map *map, char *line, int fd)
@@ -51,7 +64,9 @@ void	ft_init_map_suite(t_list_map *map, char *line, int fd)
 	ft_close(map, fd);
 	if (map->verif.last_verif != 8 || ft_test_info_map(map) == -1
 		|| ft_test_map(map) < 0)
+	{
 		ft_return_error(map, WRONG_FILECUB);
+	}
 }
 
 void	ft_init_map(t_list_map *map, char *cub)
@@ -74,5 +89,6 @@ void	ft_init_map(t_list_map *map, char *cub)
 				line, map->map.t_map_y++);
 		free(line);
 	}
+	ft_test_f_c(map);
 	ft_init_map_suite(map, line, fd);
 }

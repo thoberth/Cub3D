@@ -26,7 +26,7 @@ float	ft_dist_wallh(t_list_map *map, int i)
 	float	ay;
 
 	ay = (int)(map->plr.vposy / map->map.tcub) * map->map.tcub;
-	if (map->ray.actual_ang < 360 && map->ray.actual_ang > 180)
+	if ((map->ray.actual_ang <= 360 && map->ray.actual_ang > 180))
 		ay += map->map.tcub;
 	ax = map->plr.vposx + (map->plr.vposy - ay) /
 		tan(map->ray.actual_ang * (M_PI / 180));
@@ -51,7 +51,7 @@ float	ft_dist_wallv(t_list_map *map, int i)
 	float	ay;
 
 	ax = (int)(map->plr.vposx / map->map.tcub) * map->map.tcub;
-	if (!(map->ray.actual_ang >= 90 && map->ray.actual_ang <= 270))
+	if (!(map->ray.actual_ang > 90 && map->ray.actual_ang <= 270))
 		ax += map->map.tcub;
 	ay = map->plr.vposy + (map->plr.vposx - ax) *
 		tan(map->ray.actual_ang * (M_PI / 180));
@@ -59,7 +59,7 @@ float	ft_dist_wallv(t_list_map *map, int i)
 		ay = 0;
 	if (ay > ((map->map.tcub * map->map.t_map_y) - 1))
 		ay = (map->map.tcub * map->map.t_map_y) - 1;
-	if (ft_iswall(map, ax, ay, 1) == 1 || ft_iswall(map, ax, ay, 0) == 3)
+	if (ft_iswall(map, ax, ay, 1) == 1 || ft_iswall(map, ax, ay, 1) == 3)
 	{
 		map->tex.wall_tex[i][2] = ay;
 		return (ft_dist_wall3(map, ax, ay));
