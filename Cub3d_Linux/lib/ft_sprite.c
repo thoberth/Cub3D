@@ -30,14 +30,16 @@ void	ft_sort_sprite(t_list_map *map)
 	a = 0;
 	while ((a + 1) < map->ray.nbr_sprite)
 	{
-		while (map->ray.is_sprite[map->ray.sort[a]][4] <
-			map->ray.is_sprite[map->ray.sort[a + 1]][4])
+		if (map->ray.is_sprite[map->ray.sort[a]][3] <
+			map->ray.is_sprite[map->ray.sort[a + 1]][3])
 		{
 			i = map->ray.sort[a];
 			map->ray.sort[a] = map->ray.sort[a + 1];
 			map->ray.sort[a + 1] = i;
+			a = 0;
 		}
-		a++;
+		else
+			a++;
 	}
 }
 
@@ -90,7 +92,7 @@ void	ft_sprite(t_list_map *map, int i)
 
 	a = 0;
 	b = 0;
-	while (a < i)
+	while (a <= i)
 	{
 		if (map->ray.tmp_sprite[0] == map->ray.is_sprite[a][1] &&
 			map->ray.tmp_sprite[1] == map->ray.is_sprite[a][2])
