@@ -26,7 +26,7 @@ float	ft_dist_wallh(t_list_map *map, int i)
 	float	ay;
 
 	ay = (int)(map->plr.vposy / map->map.tcub) * map->map.tcub;
-	if ((map->ray.actual_ang < 360 && map->ray.actual_ang >= 180))
+	if ((map->ray.actual_ang <= 360 && map->ray.actual_ang > 180))
 		ay += map->map.tcub;
 	ax = map->plr.vposx + (map->plr.vposy - ay) /
 		tan(map->ray.actual_ang * (M_PI / 180));

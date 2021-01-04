@@ -35,7 +35,7 @@ void	ft_start_all(t_list_map *map, char *str)
 	}
 	mlx_hook(map->data.win_ptr, 2, 1L << 0, deal_key, map);
 	mlx_hook(map->data.win_ptr, 3, 1L << 1, do_nothing, (void*)0);
-	mlx_hook(map->data.win_ptr, 17, 0, close_window, map);
-	mlx_loop_hook(map->data.mlx_ptr, ft_hook_for_screen, map);
+	mlx_hook(map->data.win_ptr, 17, 1L << 17, close_window, map);
+	mlx_hook(map->data.win_ptr, 15, 1L << 16, ft_hook_for_screen, map);
 	mlx_loop(map->data.mlx_ptr);
 }
