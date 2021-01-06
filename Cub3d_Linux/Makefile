@@ -44,7 +44,6 @@ ${NAME} : ${OBJS}
 ${NAMEMLX} :
 	cd ${MLXPATH} ; make ; cp ${NAMEMLX} ../ ; cd ..
 
-
 all: ${EXEC}
 
 %.o : %.c

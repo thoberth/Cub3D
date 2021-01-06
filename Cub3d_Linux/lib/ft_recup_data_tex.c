@@ -33,44 +33,42 @@ void	ft_verif_file_tex(t_list_map *map)
 		ft_return_error(map, WRONG_FILECUB);
 }
 
-void	ft_recup_data_tex2(t_list_map *map, void *img)
+void	ft_recup_data_tex2(t_list_map *map)
 {
-	img = mlx_xpm_file_to_image(map->data.mlx_ptr, map->map.ea,
+	map->tex.imgea = mlx_xpm_file_to_image(map->data.mlx_ptr, map->map.ea,
 		&map->tex.t_ea[0], &map->tex.t_ea[1]);
-	if (img == NULL)
+	if (map->tex.imgea == NULL)
 		ft_return_error(map, WRONG_FILECUB);
-	map->tex.texea = mlx_get_data_addr(img, &map->tex.bpp,
+	map->tex.texea = mlx_get_data_addr(map->tex.imgea, &map->tex.bpp,
 		&map->tex.sizeline, &map->tex.endian);
-	img = mlx_xpm_file_to_image(map->data.mlx_ptr, map->map.sprite,
+	map->tex.imgs = mlx_xpm_file_to_image(map->data.mlx_ptr, map->map.sprite,
 		&map->tex.t_s[0], &map->tex.t_s[1]);
-	if (img == NULL)
+	if (map->tex.imgs == NULL)
 		ft_return_error(map, WRONG_FILECUB);
-	map->tex.texs = mlx_get_data_addr(img, &map->tex.bpp,
+	map->tex.texs = mlx_get_data_addr(map->tex.imgs, &map->tex.bpp,
 		&map->tex.sizeline, &map->tex.endian);
 }
 
 void	ft_recup_data_tex(t_list_map *map)
 {
-	void	*img;
-
 	ft_verif_file_tex(map);
-	img = mlx_xpm_file_to_image(map->data.mlx_ptr, map->map.no,
+	map->tex.imgno = mlx_xpm_file_to_image(map->data.mlx_ptr, map->map.no,
 		&map->tex.t_no[0], &map->tex.t_no[1]);
-	if (img == NULL)
+	if (map->tex.imgno == NULL)
 		ft_return_error(map, WRONG_FILECUB);
-	map->tex.texno = mlx_get_data_addr(img, &map->tex.bpp,
+	map->tex.texno = mlx_get_data_addr(map->tex.imgno, &map->tex.bpp,
 		&map->tex.sizeline, &map->tex.endian);
-	img = mlx_xpm_file_to_image(map->data.mlx_ptr, map->map.so,
+	map->tex.imgso = mlx_xpm_file_to_image(map->data.mlx_ptr, map->map.so,
 		&map->tex.t_so[0], &map->tex.t_so[1]);
-	if (img == NULL)
+	if (map->tex.imgso == NULL)
 		ft_return_error(map, WRONG_FILECUB);
-	map->tex.texso = mlx_get_data_addr(img, &map->tex.bpp,
+	map->tex.texso = mlx_get_data_addr(map->tex.imgso, &map->tex.bpp,
 		&map->tex.sizeline, &map->tex.endian);
-	img = mlx_xpm_file_to_image(map->data.mlx_ptr, map->map.we,
+	map->tex.imgwe = mlx_xpm_file_to_image(map->data.mlx_ptr, map->map.we,
 		&map->tex.t_we[0], &map->tex.t_we[1]);
-	if (img == NULL)
+	if (map->tex.imgwe == NULL)
 		ft_return_error(map, WRONG_FILECUB);
-	map->tex.texwe = mlx_get_data_addr(img, &map->tex.bpp,
+	map->tex.texwe = mlx_get_data_addr(map->tex.imgwe, &map->tex.bpp,
 		&map->tex.sizeline, &map->tex.endian);
-	ft_recup_data_tex2(map, img);
+	ft_recup_data_tex2(map);
 }

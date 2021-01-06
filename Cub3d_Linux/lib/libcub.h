@@ -131,14 +131,19 @@ typedef struct	s_all
 */
 	struct		s_tex
 	{
+		void	*imgno;
 		char	*texno;
 		int		t_no[2];
+		void	*imgso;
 		char	*texso;
 		int		t_so[2];
+		void	*imgea;
 		char	*texea;
 		int		t_ea[2];
+		void	*imgwe;
 		char	*texwe;
 		int		t_we[2];
+		void	*imgs;
 		char	*texs;
 		int		t_s[2];
 		int		sizeline;
