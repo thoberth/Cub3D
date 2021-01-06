@@ -15,7 +15,7 @@ SRCS	=	main.c	\
 
 OBJS	=	${SRCS:.c=.o}  
 
-CC		=	gcc
+CC		=	clang
 
 CFLAGS	=	-Wall -Wextra -Werror
 
@@ -33,7 +33,7 @@ RM		=	rm -f
 
 ARRC	=	ar rcs ${NAME}
 
-EXEC	=	Cub3d
+EXEC	=	cub3D
 
 ${EXEC} : ${NAME} ${NAMEMLX}
 	${CC} -o $@ $^ ${MLXFLAG}

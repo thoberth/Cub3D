@@ -6,7 +6,7 @@
 #    By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/21 15:20:17 by thoberth          #+#    #+#              #
-#    Updated: 2020/12/28 13:20:04 by thoberth         ###   ########.fr        #
+#    Updated: 2021/01/05 12:00:11 by thoberth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ SRCS	=	main.c	\
 
 OBJS	=	${SRCS:.c=.o}
 
-CC		=	gcc
+CC		=	clang
 
 CFLAGS	=	-Wall -Wextra -Werror
 
@@ -33,7 +33,7 @@ RM		=	rm -f
 
 ARRC	=	ar rcs ${NAME}
 
-EXEC	=	Cub3d
+EXEC	=	cub3D
 
 ${EXEC} : ${NAME} ${NAMEMLX}
 	${CC} -o $@ $^ ${MLXFLAG}
