@@ -24,6 +24,7 @@ void	ft_free_suite(t_list_map *map)
 			if (map->ray.is_sprite[i] != NULL)
 				free(map->ray.is_sprite[i++]);
 		}
+		free(map->ray.is_sprite);
 	}
 	i = 0;
 	if (map->tex.wall_tex != NULL)
@@ -33,7 +34,10 @@ void	ft_free_suite(t_list_map *map)
 			if (map->tex.wall_tex[i] != NULL)
 				free(map->tex.wall_tex[i++]);
 		}
+		free(map->tex.wall_tex);
 	}
+	if (map->map.sprite != NULL)
+		free(map->map.sprite);
 }
 
 void	ft_free(t_list_map *map)
@@ -54,6 +58,14 @@ void	ft_free(t_list_map *map)
 		free(map->ray.dist);
 	if (map->ray.sort != NULL)
 		free(map->ray.sort);
+	if (map->map.no != NULL)
+		free(map->map.no);
+	if (map->map.so != NULL)
+		free(map->map.so);
+	if (map->map.ea != NULL)
+		free(map->map.ea);
+	if (map->map.we != NULL)
+		free(map->map.we);
 	ft_free_suite(map);
 }
 

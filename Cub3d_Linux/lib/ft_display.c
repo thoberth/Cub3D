@@ -19,9 +19,9 @@ int		ft_display_fctex(t_list_map *map, int v, int i)
 	t = 0;
 	while (t < map->dis.t_fc)
 	{
-		map->data.data_addr[i++] = (v ? map->map.f[0] : map->map.c[0]);
-		map->data.data_addr[i++] = (v ? map->map.f[1] : map->map.c[1]);
-		map->data.data_addr[i++] = (v ? map->map.f[2] : map->map.c[2]);
+		map->data.data_addr[i++] = (v ? map->map.c[2] : map->map.f[2]);
+		map->data.data_addr[i++] = (v ? map->map.c[1] : map->map.f[1]);
+		map->data.data_addr[i++] = (v ? map->map.c[0] : map->map.f[0]);
 		i += map->map.size_line - 3;
 		t++;
 	}

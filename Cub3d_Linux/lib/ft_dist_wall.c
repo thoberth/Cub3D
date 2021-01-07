@@ -34,13 +34,13 @@ float	ft_dist_wallh(t_list_map *map, int i)
 		ax = 0;
 	if (ax > (map->map.tcub * map->map.t_map_x) - 1)
 		ax = (map->map.tcub * map->map.t_map_x) - 1;
+	if (ft_iswall(map, ax, ay, 0) == 2)
+		ft_sprite(map, i);
 	if (ft_iswall(map, ax, ay, 0) == 1 || ft_iswall(map, ax, ay, 0) == 3)
 	{
 		map->tex.wall_tex[i][1] = ax;
 		return (ft_dist_wall3(map, ax, ay));
 	}
-	if (ft_iswall(map, ax, ay, 0) == 2)
-		ft_sprite(map, i);
 	ft_calcul_deltah(map);
 	return (ft_dist_wall2h(map, ax, ay, i));
 }
@@ -59,13 +59,13 @@ float	ft_dist_wallv(t_list_map *map, int i)
 		ay = 0;
 	if (ay > ((map->map.tcub * map->map.t_map_y) - 1))
 		ay = (map->map.tcub * map->map.t_map_y) - 1;
+	if (ft_iswall(map, ax, ay, 1) == 2)
+		ft_sprite(map, i);
 	if (ft_iswall(map, ax, ay, 1) == 1 || ft_iswall(map, ax, ay, 1) == 3)
 	{
 		map->tex.wall_tex[i][2] = ay;
 		return (ft_dist_wall3(map, ax, ay));
 	}
-	if (ft_iswall(map, ax, ay, 1) == 2)
-		ft_sprite(map, i);
 	ft_calcul_deltav(map);
 	return (ft_dist_wall2v(map, ax, ay, i));
 }
