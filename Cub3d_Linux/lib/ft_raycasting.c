@@ -121,7 +121,7 @@ void	ft_raycasting(t_list_map *map)
 	if (map->verif.save == 1)
 	{
 		ft_save(map);
-		ft_return_error(map, SAVE);
+		close_window(map);
 	}
 	mlx_put_image_to_window(map->data.mlx_ptr, map->data.win_ptr,
 		map->data.img_ptr, 0, 0);
