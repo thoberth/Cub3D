@@ -51,6 +51,7 @@ typedef struct	s_all
 		int		verif_c;
 		int		last_verif;
 		int		save;
+		int		problem;
 	}			verif;
 /*
 ** Structure contenant les var de verif

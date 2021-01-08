@@ -69,6 +69,29 @@ void	ft_free(t_list_map *map)
 	ft_free_suite(map);
 }
 
+void	ft_free_mlx(t_list_map *map)
+{
+	if (map->data.img_ptr != NULL)
+		mlx_destroy_image(map->data.mlx_ptr, map->data.img_ptr);
+	if (map->tex.imgno != NULL)
+		mlx_destroy_image(map->data.mlx_ptr, map->tex.imgno);
+	if (map->tex.imgso != NULL)
+		mlx_destroy_image(map->data.mlx_ptr, map->tex.imgso);
+	if (map->tex.imgwe != NULL)
+		mlx_destroy_image(map->data.mlx_ptr, map->tex.imgwe);
+	if (map->tex.imgea != NULL)
+		mlx_destroy_image(map->data.mlx_ptr, map->tex.imgea);
+	if (map->tex.imgs != NULL)
+		mlx_destroy_image(map->data.mlx_ptr, map->tex.imgs);
+	if (map->data.win_ptr != NULL)
+		mlx_destroy_window(map->data.mlx_ptr, map->data.win_ptr);
+	if (map->data.mlx_ptr != NULL)
+	{
+		mlx_destroy_display(map->data.mlx_ptr);
+		free(map->data.mlx_ptr);
+	}
+}
+
 void	ft_return_error(t_list_map *map, int define)
 {
 	if (define == ERROR_MALLOC)
@@ -80,7 +103,10 @@ void	ft_return_error(t_list_map *map, int define)
 	else if (define == WRONG_NUMBER_ARGUMENTS)
 		ft_putstr("Error, invalid arguments.\n");
 	if (!(define == WRONG_NUMBER_ARGUMENTS))
+	{
+		ft_free_mlx(map);
 		ft_free(map);
+	}
 	if (define == EXIT_SUCCESS)
 		exit(EXIT_SUCCESS);
 	exit(EXIT_FAILURE);

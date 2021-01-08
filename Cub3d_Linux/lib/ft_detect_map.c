@@ -21,7 +21,7 @@ void	ft_recup_info_f_c(t_list_map *map, char *line, int i, int dest[3])
 		i++;
 	while (line[i] == ' ')
 		i++;
-	line[i] == ',' ? i++ : ft_return_error(map, WRONG_FILECUB);
+	line[i] == ',' ? i++ : map->verif.problem++;
 	while (line[i] == ' ')
 		i++;
 	dest[1] = ft_atoi(&line[i]);
@@ -29,14 +29,14 @@ void	ft_recup_info_f_c(t_list_map *map, char *line, int i, int dest[3])
 		i++;
 	while (line[i] == ' ')
 		i++;
-	line[i] == ',' ? i++ : ft_return_error(map, WRONG_FILECUB);
+	line[i] == ',' ? i++ : map->verif.problem++;
 	while (line[i] == ' ')
 		i++;
 	dest[2] = ft_atoi(&line[i]);
 	while (line[i] >= '0' && line[i] <= '9')
 		i++;
 	if (line[i] != '\0')
-		ft_return_error(map, WRONG_FILECUB);
+		map->verif.problem++;
 }
 
 void	ft_detect_map4(t_list_map *map, char *line, int i)
@@ -131,7 +131,7 @@ void	ft_detect_map(t_list_map *map, char *line)
 		map->map.reso[1] = ft_atoi(&line[i]);
 		while (line[i] >= '0' && line[i] <= '9')
 			i++;
-		line[i] != '\0' ? ft_return_error(map, WRONG_FILECUB) : 0;
+		line[i] != '\0' ? map->verif.problem++ : 0;
 		ft_verif_reso(map);
 	}
 	else

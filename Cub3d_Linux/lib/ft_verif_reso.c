@@ -20,7 +20,7 @@ void	ft_verif_reso(t_list_map *map)
 	a = 0;
 	b = 0;
 	if (map->map.reso[0] < 1 || map->map.reso[1] < 1)
-		ft_return_error(map, WRONG_FILECUB);
+		map->verif.problem++;
 	if (map->verif.save == 0)
 	{
 		mlx_get_screen_size(map->data.mlx_ptr, &a, &b);

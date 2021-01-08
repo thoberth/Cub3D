@@ -44,16 +44,16 @@ ${NAME} : ${OBJS}
 ${NAMEMLX} :
 	cd ${MLXPATH} ; make ; cp ${NAMEMLX} ../ ; cd ..
 
-all: ${EXEC}
-
 %.o : %.c
 	${CC} ${CFLAGS} -c $^ -o $@
 
+all: ${EXEC}
+
 clean:
-	${RM} ${OBJS} ; cd ${MLXPATH} ; make clean ; cd ../
+	${RM} ${OBJS} ${NAME} ${NAMEMLX} ; cd ${MLXPATH} ; make clean ; cd ..
 
 fclean: clean
-	${RM} ${NAME} ${NAMEMLX} ${EXEC}
+	${RM} ${EXEC}
 
 re: fclean all
 

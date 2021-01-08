@@ -15,6 +15,7 @@
 void	ft_init_map2(t_list_map *map)
 {
 	map->verif.verif_reso = 0;
+	map->verif.problem = 0;
 	map->verif.verif_f = 0;
 	map->verif.verif_c = 0;
 	map->verif.last_verif = 0;
@@ -64,8 +65,9 @@ void	ft_init_map_suite(t_list_map *map, char *line, int fd)
 	free(line);
 	map->map.map = ft_resize_map(map, map->map.t_map_y);
 	ft_close(map, fd);
+	ft_test_f_c(map);
 	if (map->verif.last_verif != 8 || ft_test_info_map(map) == -1
-		|| ft_test_map(map) < 0)
+		|| ft_test_map(map) < 0 || map->verif.problem > 0)
 	{
 		ft_return_error(map, WRONG_FILECUB);
 	}
@@ -91,6 +93,5 @@ void	ft_init_map(t_list_map *map, char *cub)
 				line, map->map.t_map_y++);
 		free(line);
 	}
-	ft_test_f_c(map);
 	ft_init_map_suite(map, line, fd);
 }
