@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 14:59:00 by thoberth          #+#    #+#             */
-/*   Updated: 2021/01/05 00:21:19 by thoberth         ###   ########.fr       */
+/*   Updated: 2021/01/18 15:43:36 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int		ft_hook_for_screen(t_list_map *map)
 {
-	ft_raycasting(map);
+	mlx_put_image_to_window(map->data.mlx_ptr, map->data.win_ptr,
+		map->data.img_ptr, 0, 0);
 	return (1);
 }
 

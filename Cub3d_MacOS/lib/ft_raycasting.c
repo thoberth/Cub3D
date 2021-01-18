@@ -63,6 +63,13 @@ int		ft_iswall(t_list_map *map, int t, int i, int v)
 	return (0);
 }
 
+void	ft_init_sprite_array(t_list_map *map, int i)
+{
+	map->ray.is_sprite[i][0] = 0;
+	map->ray.is_sprite[i][1] = 0;
+	map->ray.is_sprite[i][2] = 0;
+}
+
 void	ft_find_dist(t_list_map *map)
 {
 	int		i;
@@ -75,7 +82,7 @@ void	ft_find_dist(t_list_map *map)
 	map->ray.nbr_sprite = 0;
 	while (i < map->map.reso[0])
 	{
-		map->ray.is_sprite[i][0] = 0;
+		ft_init_sprite_array(map, i);
 		map->ray.dist[i] = ft_dist_wall(map, i) * cos(ang * (M_PI / 180));
 		if (map->ray.is_sprite[i][0] == 1)
 		{
@@ -114,7 +121,7 @@ void	ft_raycasting(t_list_map *map)
 	if (map->verif.save == 1)
 	{
 		ft_save(map);
-		ft_return_error(map, SAVE);
+		close_window(map);
 	}
 	mlx_put_image_to_window(map->data.mlx_ptr, map->data.win_ptr,
 		map->data.img_ptr, 0, 0);

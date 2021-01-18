@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 13:21:32 by berthetthom       #+#    #+#             */
-/*   Updated: 2020/12/31 15:52:57 by thoberth         ###   ########.fr       */
+/*   Updated: 2021/01/18 15:36:53 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_free_suite(t_list_map *map)
 			if (map->ray.is_sprite[i] != NULL)
 				free(map->ray.is_sprite[i++]);
 		}
+		free(map->ray.is_sprite);
 	}
 	i = 0;
 	if (map->tex.wall_tex != NULL)
@@ -33,7 +34,10 @@ void	ft_free_suite(t_list_map *map)
 			if (map->tex.wall_tex[i] != NULL)
 				free(map->tex.wall_tex[i++]);
 		}
+		free(map->tex.wall_tex);
 	}
+	if (map->map.sprite != NULL)
+		free(map->map.sprite);
 }
 
 void	ft_free(t_list_map *map)
@@ -54,7 +58,37 @@ void	ft_free(t_list_map *map)
 		free(map->ray.dist);
 	if (map->ray.sort != NULL)
 		free(map->ray.sort);
+	if (map->map.no != NULL)
+		free(map->map.no);
+	if (map->map.so != NULL)
+		free(map->map.so);
+	if (map->map.ea != NULL)
+		free(map->map.ea);
+	if (map->map.we != NULL)
+		free(map->map.we);
 	ft_free_suite(map);
+}
+
+void	ft_free_mlx(t_list_map *map)
+{
+	if (map->data.img_ptr != NULL)
+		mlx_destroy_image(map->data.mlx_ptr, map->data.img_ptr);
+	if (map->tex.imgno != NULL)
+		mlx_destroy_image(map->data.mlx_ptr, map->tex.imgno);
+	if (map->tex.imgso != NULL)
+		mlx_destroy_image(map->data.mlx_ptr, map->tex.imgso);
+	if (map->tex.imgwe != NULL)
+		mlx_destroy_image(map->data.mlx_ptr, map->tex.imgwe);
+	if (map->tex.imgea != NULL)
+		mlx_destroy_image(map->data.mlx_ptr, map->tex.imgea);
+	if (map->tex.imgs != NULL)
+		mlx_destroy_image(map->data.mlx_ptr, map->tex.imgs);
+	if (map->data.win_ptr != NULL)
+		mlx_destroy_window(map->data.mlx_ptr, map->data.win_ptr);
+	if (map->data.mlx_ptr != NULL)
+	{
+		free(map->data.mlx_ptr);
+	}
 }
 
 void	ft_return_error(t_list_map *map, int define)
@@ -68,7 +102,10 @@ void	ft_return_error(t_list_map *map, int define)
 	else if (define == WRONG_NUMBER_ARGUMENTS)
 		ft_putstr("Error, invalid arguments.\n");
 	if (!(define == WRONG_NUMBER_ARGUMENTS))
+	{
+		ft_free_mlx(map);
 		ft_free(map);
+	}
 	if (define == EXIT_SUCCESS)
 		exit(EXIT_SUCCESS);
 	exit(EXIT_FAILURE);

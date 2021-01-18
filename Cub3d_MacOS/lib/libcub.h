@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:08:08 by thoberth          #+#    #+#             */
-/*   Updated: 2021/01/04 17:21:08 by thoberth         ###   ########.fr       */
+/*   Updated: 2021/01/18 15:42:30 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define KEY_GO_BACK 1
 # define KEY_GO_LEFT 0
 # define KEY_GO_RIGHT 2
+# define M_PI 3.141592
 # include <stdio.h>
 # include <sys/types.h>
 # include <sys/stat.h>
@@ -50,6 +51,7 @@ typedef struct	s_all
 		int		verif_c;
 		int		last_verif;
 		int		save;
+		int		problem;
 	}			verif;
 /*
 ** Structure contenant les var de verif
@@ -130,14 +132,19 @@ typedef struct	s_all
 */
 	struct		s_tex
 	{
+		void	*imgno;
 		char	*texno;
 		int		t_no[2];
+		void	*imgso;
 		char	*texso;
 		int		t_so[2];
+		void	*imgea;
 		char	*texea;
 		int		t_ea[2];
+		void	*imgwe;
 		char	*texwe;
 		int		t_we[2];
+		void	*imgs;
 		char	*texs;
 		int		t_s[2];
 		int		sizeline;

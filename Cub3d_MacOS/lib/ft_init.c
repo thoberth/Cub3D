@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:07:32 by thoberth          #+#    #+#             */
-/*   Updated: 2021/01/05 00:24:25 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/12/31 16:12:28 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	ft_init_map2(t_list_map *map)
 {
 	map->verif.verif_reso = 0;
+	map->verif.problem = 0;
 	map->verif.verif_f = 0;
 	map->verif.verif_c = 0;
 	map->verif.last_verif = 0;
@@ -25,17 +26,19 @@ void	ft_init_map2(t_list_map *map)
 	map->map.ea = NULL;
 	map->map.we = NULL;
 	map->map.sprite = NULL;
-	map->data.is_2d = 0;
 	map->data.win_ptr = NULL;
 	map->data.img_ptr = NULL;
-	map->data.img_ptr_minimap = NULL;
 	map->data.data_addr = NULL;
-	map->data.data_addr_minimap = NULL;
 	map->map.map = malloc(sizeof(char **));
 	map->ray.dist = NULL;
 	map->ray.is_sprite = NULL;
 	map->ray.sort = NULL;
 	map->tex.wall_tex = NULL;
+	map->tex.imgno = NULL;
+	map->tex.imgso = NULL;
+	map->tex.imgea = NULL;
+	map->tex.imgwe = NULL;
+	map->tex.imgs = NULL;
 }
 
 void	ft_test_f_c(t_list_map *map)
@@ -62,8 +65,9 @@ void	ft_init_map_suite(t_list_map *map, char *line, int fd)
 	free(line);
 	map->map.map = ft_resize_map(map, map->map.t_map_y);
 	ft_close(map, fd);
+	ft_test_f_c(map);
 	if (map->verif.last_verif != 8 || ft_test_info_map(map) == -1
-		|| ft_test_map(map) < 0)
+		|| ft_test_map(map) < 0 || map->verif.problem > 0)
 	{
 		ft_return_error(map, WRONG_FILECUB);
 	}
@@ -89,6 +93,5 @@ void	ft_init_map(t_list_map *map, char *cub)
 				line, map->map.t_map_y++);
 		free(line);
 	}
-	ft_test_f_c(map);
 	ft_init_map_suite(map, line, fd);
 }

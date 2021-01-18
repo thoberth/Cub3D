@@ -6,7 +6,7 @@
 /*   By: thoberth <thoberth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 12:01:27 by thoberth          #+#    #+#             */
-/*   Updated: 2021/01/04 17:21:18 by thoberth         ###   ########.fr       */
+/*   Updated: 2020/12/31 15:50:21 by thoberth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,6 @@ void	ft_mod_pos(int key, t_list_map *map)
 
 int		close_window(t_list_map *map)
 {
-	if (map->data.img_ptr != NULL)
-		mlx_destroy_image(map->data.mlx_ptr, map->data.img_ptr);
-	mlx_destroy_window(map->data.mlx_ptr, map->data.win_ptr);
-	free(map->data.mlx_ptr);
 	ft_return_error(map, EXIT_SUCCESS);
 	return (0);
 }
